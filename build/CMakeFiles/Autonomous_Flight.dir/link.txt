@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Autonomous_Flight.dir/Autonomous_Flight.cpp.o -o Autonomous_Flight  /usr/lib/libmavsdk.so.3.15.0 -ldl 
