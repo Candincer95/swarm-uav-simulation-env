@@ -14,7 +14,7 @@ echo "[SYSTEM] 1. Starting Micro XRCE-DDS Agent..."
 micro-xrce-dds-agent udp4 -p 8888 > /tmp/dds_agent.log 2>&1 &
 sleep 1
 
-echo "[SYSTEM] 2. Launching Gazebo independently from your repo..."
+echo "[SYSTEM] 2. Launching Gazebo independently from repo..."
 gz sim $WORLD_PATH &
 
 echo "[SYSTEM] Waiting 15 seconds for Gazebo and models to load..."
