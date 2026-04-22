@@ -80,7 +80,7 @@ class SwarmManager {
             std::cout << "[MANAGER] All drones are airborne. Awaiting mission\n\n";
         }
 
-        // CAPABILITY 1: LINNE ABREAST FORMATION (TRANSIT)
+        // LINNE ABREAST FORMATION (TRANSIT)
         void mode_LineAbreastFormation(int duration_seconds){
             std::cout << "[MANAGER] MODE: Line Abreast Formation started. Transiting to target area...\n";
             is_formation_active = true;
@@ -99,7 +99,7 @@ class SwarmManager {
 
             float leader_north_target = 0.0f;
 
-            //Fly in formationfor the specified duration
+            //Fly in formation for the specified duration
             for(int i=0; i<(duration_seconds * 20); ++i) { //20Hz loop
                 leader_north_target += 0.1f;
 
@@ -145,7 +145,7 @@ class SwarmManager {
             follower->offboard->stop();
         }
 
-        //CAPABILITY 2: INDEPENDENT EXPLORATION (FOREST SCANNING)
+        // INDEPENDENT EXPLORATION (FOREST SCANNING)
         void mode_IndependentExploration() {
             std::cout << "[MANAGER] MODE: Independent Exploration (Lawnmover) started. Swarm is dispersing to the area...\n";
 
@@ -180,7 +180,7 @@ class SwarmManager {
             std::cout << "[MANAGER] Exploration routes uploaded, scanning in process...\n";
         }
 
-        //CAPABILITY 3: TRIANGLE (V-SHAPE) FORMATION
+        // TRIANGLE (V-SHAPE) FORMATION
         void mode_TriangleFormation(int duration_seconds) {
             std::cout << "[MANAGER] MODE: Triangle (V-Shape) Formation initiated...\n";
             is_formation_active = true;
