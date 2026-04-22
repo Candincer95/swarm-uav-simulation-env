@@ -65,6 +65,7 @@ CMAKE_BINARY_DIR = /home/candincer/swarm-uav-simulation-env/build
 # The main recursive "all" target.
 all: CMakeFiles/Autonomous_Flight.dir/all
 all: CMakeFiles/Swarm_UAV.dir/all
+all: CMakeFiles/Swarm_Manager_Node.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -74,6 +75,7 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/Autonomous_Flight.dir/clean
 clean: CMakeFiles/Swarm_UAV.dir/clean
+clean: CMakeFiles/Swarm_Manager_Node.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -109,7 +111,7 @@ CMakeFiles/Autonomous_Flight.dir/clean:
 CMakeFiles/Swarm_UAV.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Swarm_UAV.dir/build.make CMakeFiles/Swarm_UAV.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Swarm_UAV.dir/build.make CMakeFiles/Swarm_UAV.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/candincer/swarm-uav-simulation-env/build/CMakeFiles --progress-num=3,4 "Built target Swarm_UAV"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/candincer/swarm-uav-simulation-env/build/CMakeFiles --progress-num=5,6 "Built target Swarm_UAV"
 .PHONY : CMakeFiles/Swarm_UAV.dir/all
 
 # Build rule for subdir invocation for target.
@@ -127,6 +129,32 @@ Swarm_UAV: CMakeFiles/Swarm_UAV.dir/rule
 CMakeFiles/Swarm_UAV.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Swarm_UAV.dir/build.make CMakeFiles/Swarm_UAV.dir/clean
 .PHONY : CMakeFiles/Swarm_UAV.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/Swarm_Manager_Node.dir
+
+# All Build rule for target.
+CMakeFiles/Swarm_Manager_Node.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Swarm_Manager_Node.dir/build.make CMakeFiles/Swarm_Manager_Node.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Swarm_Manager_Node.dir/build.make CMakeFiles/Swarm_Manager_Node.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/candincer/swarm-uav-simulation-env/build/CMakeFiles --progress-num=3,4 "Built target Swarm_Manager_Node"
+.PHONY : CMakeFiles/Swarm_Manager_Node.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/Swarm_Manager_Node.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/candincer/swarm-uav-simulation-env/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Swarm_Manager_Node.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/candincer/swarm-uav-simulation-env/build/CMakeFiles 0
+.PHONY : CMakeFiles/Swarm_Manager_Node.dir/rule
+
+# Convenience name for target.
+Swarm_Manager_Node: CMakeFiles/Swarm_Manager_Node.dir/rule
+.PHONY : Swarm_Manager_Node
+
+# clean rule for target.
+CMakeFiles/Swarm_Manager_Node.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Swarm_Manager_Node.dir/build.make CMakeFiles/Swarm_Manager_Node.dir/clean
+.PHONY : CMakeFiles/Swarm_Manager_Node.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

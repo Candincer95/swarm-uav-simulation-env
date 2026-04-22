@@ -1,4 +1,5 @@
 /home/candincer/swarm-uav-simulation-env/build/CMakeFiles/Autonomous_Flight.dir
 /home/candincer/swarm-uav-simulation-env/build/CMakeFiles/Swarm_UAV.dir
+/home/candincer/swarm-uav-simulation-env/build/CMakeFiles/Swarm_Manager_Node.dir
 /home/candincer/swarm-uav-simulation-env/build/CMakeFiles/edit_cache.dir
 /home/candincer/swarm-uav-simulation-env/build/CMakeFiles/rebuild_cache.dir

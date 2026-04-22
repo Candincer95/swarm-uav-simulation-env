@@ -142,6 +142,19 @@ Swarm_UAV/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Swarm_UAV.dir/build.make CMakeFiles/Swarm_UAV.dir/build
 .PHONY : Swarm_UAV/fast
 
+#=============================================================================
+# Target rules for targets named Swarm_Manager_Node
+
+# Build rule for target.
+Swarm_Manager_Node: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Swarm_Manager_Node
+.PHONY : Swarm_Manager_Node
+
+# fast build rule for target.
+Swarm_Manager_Node/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Swarm_Manager_Node.dir/build.make CMakeFiles/Swarm_Manager_Node.dir/build
+.PHONY : Swarm_Manager_Node/fast
+
 Autonomous_Flight.o: Autonomous_Flight.cpp.o
 .PHONY : Autonomous_Flight.o
 
@@ -165,6 +178,30 @@ Autonomous_Flight.s: Autonomous_Flight.cpp.s
 Autonomous_Flight.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Autonomous_Flight.dir/build.make CMakeFiles/Autonomous_Flight.dir/Autonomous_Flight.cpp.s
 .PHONY : Autonomous_Flight.cpp.s
+
+Swarm_Manager_Node.o: Swarm_Manager_Node.cpp.o
+.PHONY : Swarm_Manager_Node.o
+
+# target to build an object file
+Swarm_Manager_Node.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Swarm_Manager_Node.dir/build.make CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o
+.PHONY : Swarm_Manager_Node.cpp.o
+
+Swarm_Manager_Node.i: Swarm_Manager_Node.cpp.i
+.PHONY : Swarm_Manager_Node.i
+
+# target to preprocess a source file
+Swarm_Manager_Node.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Swarm_Manager_Node.dir/build.make CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.i
+.PHONY : Swarm_Manager_Node.cpp.i
+
+Swarm_Manager_Node.s: Swarm_Manager_Node.cpp.s
+.PHONY : Swarm_Manager_Node.s
+
+# target to generate assembly for a file
+Swarm_Manager_Node.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Swarm_Manager_Node.dir/build.make CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.s
+.PHONY : Swarm_Manager_Node.cpp.s
 
 Swarm_UAV.o: Swarm_UAV.cpp.o
 .PHONY : Swarm_UAV.o
@@ -199,10 +236,14 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Autonomous_Flight"
+	@echo "... Swarm_Manager_Node"
 	@echo "... Swarm_UAV"
 	@echo "... Autonomous_Flight.o"
 	@echo "... Autonomous_Flight.i"
 	@echo "... Autonomous_Flight.s"
+	@echo "... Swarm_Manager_Node.o"
+	@echo "... Swarm_Manager_Node.i"
+	@echo "... Swarm_Manager_Node.s"
 	@echo "... Swarm_UAV.o"
 	@echo "... Swarm_UAV.i"
 	@echo "... Swarm_UAV.s"

@@ -57,4 +57,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Autonomous_Flight.dir/DependInfo.cmake"
   "CMakeFiles/Swarm_UAV.dir/DependInfo.cmake"
+  "CMakeFiles/Swarm_Manager_Node.dir/DependInfo.cmake"
   )
