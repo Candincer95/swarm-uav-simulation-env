@@ -15,7 +15,7 @@ This repository contains a standalone, digital twin-based simulation environment
 This project is developed and tested on the following technology stack:
 * **OS:** Ubuntu 22.04 LTS
 * **Flight Stack:** PX4-Autopilot (SITL)
-* **Simulation:** Gazebo HArmonic
+* **Simulation:** Gazebo Harmonic
 * **Dependencies:** MAVSDK (C++), CMake (v3.10+), GCC (C++17)
 
 ## Installation & Build Guide
