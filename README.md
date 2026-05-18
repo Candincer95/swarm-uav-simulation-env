@@ -1,4 +1,3 @@
-```markdown
 # Swarm UAV Simulation Environment for Forest Fire Detection
 
 This repository contains a standalone, digital twin-based simulation environment for autonomous Swarm UAVs (Unmanned Aerial Vehicles). The system is specifically designed for early forest fire detection using procedurally generated environments, dynamic thermal signatures, and cooperative swarm flight algorithms.
