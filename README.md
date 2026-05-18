@@ -1,4 +1,3 @@
-```markdown
 # Swarm UAV Simulation Environment for Forest Fire Detection
 
 This repository contains a standalone, digital twin-based simulation environment for autonomous Swarm UAVs (Unmanned Aerial Vehicles). The system is specifically designed for early forest fire detection using procedurally generated environments, dynamic thermal signatures, and cooperative swarm flight algorithms.
@@ -40,18 +39,27 @@ make
 
 ## How to Run the Simulation
 
-To prevent UDP port conflicts and ensure a clean startup, a custom launch script (`launch.sh`) is provided.
-
-**Step 1: Start the Physical Environment (Gazebo & PX4)**
-Open a terminal, navigate to your `PX4-Autopilot` directory, and spawn the multi-vehicle simulation (e.g., for 3 drones):
+**Step 1: Generate a Custom Forest Environment (Optional)**
+The repository comes with a default world, but you can procedurally generate a brand new forest with randomized tree placements and a new fire ground-truth location.
+Open a terminal in the project root:
 
 ```bash
-Tools/simulation/gazebo-classic/sitl_multiple_run.sh -n 3
+cd build
+./Forest_Generator
+
+```
+
+**Step 2: Start the Physical Environment (Gazebo Harmonic & PX4)**
+Open a terminal, navigate to your `PX4-Autopilot` directory, and spawn the multi-vehicle simulation. We use the PX4_GZ_WORLD variable to load our custom forest environment:
+
+```bash
+export PX4_GZ_WORLD=forest
+Tools/simulation/gz/sitl_multiple_run.sh -n 3
 
 ```
 
 **Step 2: Execute the Swarm Manager**
-Once the drones are spawned in Gazebo, open a new terminal in this repository's root directory. Make sure the script is executable, then run it:
+Once the drones are spawned in Gazebo, open a new terminal in this repository's root directory. The custom script will clean up any ghost MAVLink ports and safely start the Swarm Manager Node:
 
 ```bash
 chmod +x launch.sh
