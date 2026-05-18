@@ -81,7 +81,7 @@ The simulation features a comprehensive, real-time Qt-based GUI that acts as bot
     * **Deny GPS Signal:** Simulates a complete loss of satellite connection to evaluate the swarm's fail-safe behavior.
     * **Inject GPS Noise (Spoof):** Injects artificial error margins into the UAVs' localization data to test formation elasticity.
     * **Recover to Normal:** Instantly restores normal sensor function and telemetry.
-* **Environment Dynamics (Wind Injection):** Operators can test the aerodynamic stability of the formation by manually adjusting **Wind Intensity (%)** and **Wind Direction ($^\circ$)** on the fly using the interactive sliders.
+* **Environment Dynamics (Wind Injection):** Operators can test the aerodynamic stability of the formation by manually adjusting **Wind Intensity (0% - 100%, where 100% equals 10 m/s physical wind speed)** and **Wind Direction (0° - 360°, where 0° indicates wind blowing exactly from the North)** on the fly using the interactive sliders. A simulated windsock is dynamically spawned within the Gazebo environment to provide real-time, physical visual feedback of the current wind vectors.
 * **Live Swarm Radar (Visualizer):** The radar panel dynamically draws the thermal scanning footprints (yellow paths) of the UAVs in real-time. This allows operators to visually verify the 6-meter overlap and ensure no blind spots remain during the unified comb sweep.
 * **Autonomous Fire Alert System:** Once a UAV's Field of View intersects with the fire's ground truth coordinates, the GUI automatically triggers a prominent **"FIRE DETECTED"** alert banner at the bottom, pinpointing the exact discovering drone and the precise X/Y location of the hazard.
 
