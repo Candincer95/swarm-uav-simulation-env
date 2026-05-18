@@ -69,6 +69,22 @@ chmod +x launch.sh
 
 *Note: The `launch.sh` script will automatically kill any ghost MAVLink ports (9090, 14581-14583), clean up the network, and safely start the Swarm Manager Node.*
 
+## Graphical User Interface (GUI) & Control Panel
+
+The simulation features a comprehensive, real-time Qt-based GUI that acts as both a "Forest Radar" and an environment control center for robustness testing.
+
+![Swarm UAV Mission Control](images/gui.png)
+
+**Key GUI Features & Usage:**
+
+* **Cyber Attack (GPS) Simulation:** To simulate real-world electronic warfare or natural interference, the control panel includes robust testing triggers:
+    * **Deny GPS Signal:** Simulates a complete loss of satellite connection to evaluate the swarm's fail-safe behavior.
+    * **Inject GPS Noise (Spoof):** Injects artificial error margins into the UAVs' localization data to test formation elasticity.
+    * **Recover to Normal:** Instantly restores normal sensor function and telemetry.
+* **Environment Dynamics (Wind Injection):** Operators can test the aerodynamic stability of the formation by manually adjusting **Wind Intensity (%)** and **Wind Direction ($^\circ$)** on the fly using the interactive sliders.
+* **Live Swarm Radar (Visualizer):** The radar panel dynamically draws the thermal scanning footprints (yellow paths) of the UAVs in real-time. This allows operators to visually verify the 6-meter overlap and ensure no blind spots remain during the unified comb sweep.
+* **Autonomous Fire Alert System:** Once a UAV's Field of View intersects with the fire's ground truth coordinates, the GUI automatically triggers a prominent **"FIRE DETECTED"** alert banner at the bottom, pinpointing the exact discovering drone and the precise X/Y location of the hazard.
+
 ## Architecture & Mathematical Modeling
 
 * **Geodetic Coordinate Conversion:** The simulation translates Cartesian coordinates (meters) to WGS84 Geodetic coordinates (Latitude/Longitude) in real-time. It utilizes a custom cosine scaling factor ($\approx 75440$ meters/degree) to adjust for the longitudinal narrowing at the Gazebo origin (Zurich, $47.39^{\circ}$ N).
