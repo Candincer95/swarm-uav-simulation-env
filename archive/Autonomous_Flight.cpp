@@ -13,7 +13,7 @@ int main() {
     Mavsdk mavsdk{Mavsdk::Configuration{ComponentType::GroundStation}};
 
     //Connect to SITL UDP port
-    ConnectionResult connection_result = mavsdk.add_any_connection("udp://:14540");
+    ConnectionResult connection_result = mavsdk.add_any_connection("udpin://0.0.0.0:14540");
     if (connection_result != ConnectionResult::Success){
         std::cerr << "Connection Error:" << connection_result << '\n';
         return 1;

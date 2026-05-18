@@ -171,35 +171,9 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: \
  /usr/include/c++/11/bits/atomic_lockfree_defines.h \
  /usr/include/c++/11/backward/auto_ptr.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h \
- /usr/include/c++/11/pstl/execution_defs.h /usr/include/mavsdk/mavsdk.h \
- /usr/include/c++/11/optional \
- /usr/include/c++/11/bits/enable_special_members.h \
- /usr/include/c++/11/functional /usr/include/c++/11/bits/std_function.h \
- /usr/include/c++/11/unordered_map /usr/include/c++/11/bits/hashtable.h \
- /usr/include/c++/11/bits/hashtable_policy.h \
- /usr/include/c++/11/bits/node_handle.h \
- /usr/include/c++/11/bits/unordered_map.h \
- /usr/include/c++/11/bits/erase_if.h /usr/include/c++/11/bits/stl_algo.h \
- /usr/include/c++/11/bits/algorithmfwd.h \
- /usr/include/c++/11/bits/stl_heap.h \
- /usr/include/c++/11/bits/uniform_int_dist.h \
- /usr/include/mavsdk/autopilot.h /usr/include/c++/11/sstream \
- /usr/include/c++/11/bits/sstream.tcc \
- /usr/include/mavsdk/compatibility_mode.h \
- /usr/include/mavsdk/deprecated.h /usr/include/mavsdk/handle.h \
- /usr/include/mavsdk/system.h /usr/include/mavsdk/component_type.h \
- /usr/include/mavsdk/vehicle.h /usr/include/mavsdk/mavlink_include.h \
- /usr/include/mavsdk/mavlink/mavlink_types.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
- /usr/include/mavsdk/mavlink/ardupilotmega/mavlink.h \
- /usr/include/mavsdk/mavlink/ardupilotmega/version.h \
- /usr/include/mavsdk/mavlink/ardupilotmega/ardupilotmega.h \
- /usr/include/mavsdk/mavlink/protocol.h /usr/include/string.h \
- /usr/include/strings.h /usr/include/mavsdk/mavlink/mavlink_helpers.h \
- /usr/include/mavsdk/mavlink/checksum.h \
- /usr/include/mavsdk/mavlink/mavlink_conversions.h \
- /usr/include/c++/11/math.h /usr/include/c++/11/cmath /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/c++/11/pstl/execution_defs.h /usr/include/c++/11/cstring \
+ /usr/include/string.h /usr/include/strings.h /usr/include/c++/11/cmath \
+ /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
@@ -219,8 +193,64 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: \
  /usr/include/c++/11/tr1/modified_bessel_func.tcc \
  /usr/include/c++/11/tr1/poly_hermite.tcc \
  /usr/include/c++/11/tr1/poly_laguerre.tcc \
- /usr/include/c++/11/tr1/riemann_zeta.tcc \
- /usr/include/mavsdk/mavlink/mavlink_sha256.h \
+ /usr/include/c++/11/tr1/riemann_zeta.tcc /usr/include/c++/11/algorithm \
+ /usr/include/c++/11/bits/stl_algo.h \
+ /usr/include/c++/11/bits/algorithmfwd.h \
+ /usr/include/c++/11/bits/stl_heap.h \
+ /usr/include/c++/11/bits/uniform_int_dist.h \
+ /usr/include/c++/11/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/11/functional /usr/include/c++/11/bits/std_function.h \
+ /usr/include/c++/11/unordered_map /usr/include/c++/11/bits/hashtable.h \
+ /usr/include/c++/11/bits/hashtable_policy.h \
+ /usr/include/c++/11/bits/enable_special_members.h \
+ /usr/include/c++/11/bits/node_handle.h \
+ /usr/include/c++/11/bits/unordered_map.h \
+ /usr/include/c++/11/bits/erase_if.h \
+ /usr/include/x86_64-linux-gnu/sys/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
+ /usr/include/x86_64-linux-gnu/bits/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/socket_type.h \
+ /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
+ /usr/include/x86_64-linux-gnu/asm/socket.h \
+ /usr/include/asm-generic/socket.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h \
+ /usr/include/x86_64-linux-gnu/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
+ /usr/include/netinet/in.h /usr/include/x86_64-linux-gnu/bits/in.h \
+ /usr/include/arpa/inet.h /usr/include/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h /usr/include/c++/11/fstream \
+ /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+ /usr/include/c++/11/bits/fstream.tcc /usr/include/mavsdk/mavsdk.h \
+ /usr/include/c++/11/optional /usr/include/mavsdk/autopilot.h \
+ /usr/include/c++/11/sstream /usr/include/c++/11/bits/sstream.tcc \
+ /usr/include/mavsdk/compatibility_mode.h \
+ /usr/include/mavsdk/deprecated.h /usr/include/mavsdk/handle.h \
+ /usr/include/mavsdk/system.h /usr/include/mavsdk/component_type.h \
+ /usr/include/mavsdk/vehicle.h /usr/include/mavsdk/mavlink_include.h \
+ /usr/include/mavsdk/mavlink/mavlink_types.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
+ /usr/include/mavsdk/mavlink/ardupilotmega/mavlink.h \
+ /usr/include/mavsdk/mavlink/ardupilotmega/version.h \
+ /usr/include/mavsdk/mavlink/ardupilotmega/ardupilotmega.h \
+ /usr/include/mavsdk/mavlink/protocol.h \
+ /usr/include/mavsdk/mavlink/mavlink_helpers.h \
+ /usr/include/mavsdk/mavlink/checksum.h \
+ /usr/include/mavsdk/mavlink/mavlink_conversions.h \
+ /usr/include/c++/11/math.h /usr/include/mavsdk/mavlink/mavlink_sha256.h \
  /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_sensor_offsets.h \
  /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_set_mag_offsets.h \
  /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_meminfo.h \
@@ -559,4 +589,6 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: \
  /usr/include/mavsdk/plugin_base.h \
  /usr/include/mavsdk/plugins/telemetry/telemetry.h \
  /usr/include/mavsdk/plugins/offboard/offboard.h \
- /usr/include/mavsdk/plugins/mission/mission.h
+ /usr/include/mavsdk/plugins/mission/mission.h \
+ /usr/include/mavsdk/plugins/failure/failure.h \
+ /usr/include/mavsdk/plugins/param/param.h

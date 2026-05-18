@@ -85,6 +85,51 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/candincer/swarm-uav-simulation-env/build/CMakeFiles /home/candincer/swarm-uav-simulation-env/build//CMakeFiles/progress.marks
@@ -155,6 +200,19 @@ Swarm_Manager_Node/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Swarm_Manager_Node.dir/build.make CMakeFiles/Swarm_Manager_Node.dir/build
 .PHONY : Swarm_Manager_Node/fast
 
+#=============================================================================
+# Target rules for targets named Forest_Generator
+
+# Build rule for target.
+Forest_Generator: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Forest_Generator
+.PHONY : Forest_Generator
+
+# fast build rule for target.
+Forest_Generator/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Forest_Generator.dir/build.make CMakeFiles/Forest_Generator.dir/build
+.PHONY : Forest_Generator/fast
+
 Autonomous_Flight.o: Autonomous_Flight.cpp.o
 .PHONY : Autonomous_Flight.o
 
@@ -178,6 +236,30 @@ Autonomous_Flight.s: Autonomous_Flight.cpp.s
 Autonomous_Flight.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Autonomous_Flight.dir/build.make CMakeFiles/Autonomous_Flight.dir/Autonomous_Flight.cpp.s
 .PHONY : Autonomous_Flight.cpp.s
+
+Forest_Generator.o: Forest_Generator.cpp.o
+.PHONY : Forest_Generator.o
+
+# target to build an object file
+Forest_Generator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Forest_Generator.dir/build.make CMakeFiles/Forest_Generator.dir/Forest_Generator.cpp.o
+.PHONY : Forest_Generator.cpp.o
+
+Forest_Generator.i: Forest_Generator.cpp.i
+.PHONY : Forest_Generator.i
+
+# target to preprocess a source file
+Forest_Generator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Forest_Generator.dir/build.make CMakeFiles/Forest_Generator.dir/Forest_Generator.cpp.i
+.PHONY : Forest_Generator.cpp.i
+
+Forest_Generator.s: Forest_Generator.cpp.s
+.PHONY : Forest_Generator.s
+
+# target to generate assembly for a file
+Forest_Generator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Forest_Generator.dir/build.make CMakeFiles/Forest_Generator.dir/Forest_Generator.cpp.s
+.PHONY : Forest_Generator.cpp.s
 
 Swarm_Manager_Node.o: Swarm_Manager_Node.cpp.o
 .PHONY : Swarm_Manager_Node.o
@@ -234,13 +316,21 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... Autonomous_Flight"
+	@echo "... Forest_Generator"
 	@echo "... Swarm_Manager_Node"
 	@echo "... Swarm_UAV"
 	@echo "... Autonomous_Flight.o"
 	@echo "... Autonomous_Flight.i"
 	@echo "... Autonomous_Flight.s"
+	@echo "... Forest_Generator.o"
+	@echo "... Forest_Generator.i"
+	@echo "... Forest_Generator.s"
 	@echo "... Swarm_Manager_Node.o"
 	@echo "... Swarm_Manager_Node.i"
 	@echo "... Swarm_Manager_Node.s"

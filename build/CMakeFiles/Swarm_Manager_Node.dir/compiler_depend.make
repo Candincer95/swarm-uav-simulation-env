@@ -218,43 +218,9 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
   /usr/include/c++/11/backward/auto_ptr.h \
   /usr/include/c++/11/pstl/glue_memory_defs.h \
   /usr/include/c++/11/pstl/execution_defs.h \
-  /usr/include/mavsdk/mavsdk.h \
-  /usr/include/c++/11/optional \
-  /usr/include/c++/11/bits/enable_special_members.h \
-  /usr/include/c++/11/functional \
-  /usr/include/c++/11/bits/std_function.h \
-  /usr/include/c++/11/unordered_map \
-  /usr/include/c++/11/bits/hashtable.h \
-  /usr/include/c++/11/bits/hashtable_policy.h \
-  /usr/include/c++/11/bits/node_handle.h \
-  /usr/include/c++/11/bits/unordered_map.h \
-  /usr/include/c++/11/bits/erase_if.h \
-  /usr/include/c++/11/bits/stl_algo.h \
-  /usr/include/c++/11/bits/algorithmfwd.h \
-  /usr/include/c++/11/bits/stl_heap.h \
-  /usr/include/c++/11/bits/uniform_int_dist.h \
-  /usr/include/mavsdk/autopilot.h \
-  /usr/include/c++/11/sstream \
-  /usr/include/c++/11/bits/sstream.tcc \
-  /usr/include/mavsdk/compatibility_mode.h \
-  /usr/include/mavsdk/deprecated.h \
-  /usr/include/mavsdk/handle.h \
-  /usr/include/mavsdk/system.h \
-  /usr/include/mavsdk/component_type.h \
-  /usr/include/mavsdk/vehicle.h \
-  /usr/include/mavsdk/mavlink_include.h \
-  /usr/include/mavsdk/mavlink/mavlink_types.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
-  /usr/include/mavsdk/mavlink/ardupilotmega/mavlink.h \
-  /usr/include/mavsdk/mavlink/ardupilotmega/version.h \
-  /usr/include/mavsdk/mavlink/ardupilotmega/ardupilotmega.h \
-  /usr/include/mavsdk/mavlink/protocol.h \
+  /usr/include/c++/11/cstring \
   /usr/include/string.h \
   /usr/include/strings.h \
-  /usr/include/mavsdk/mavlink/mavlink_helpers.h \
-  /usr/include/mavsdk/mavlink/checksum.h \
-  /usr/include/mavsdk/mavlink/mavlink_conversions.h \
-  /usr/include/c++/11/math.h \
   /usr/include/c++/11/cmath \
   /usr/include/math.h \
   /usr/include/x86_64-linux-gnu/bits/math-vector.h \
@@ -279,6 +245,76 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
   /usr/include/c++/11/tr1/poly_hermite.tcc \
   /usr/include/c++/11/tr1/poly_laguerre.tcc \
   /usr/include/c++/11/tr1/riemann_zeta.tcc \
+  /usr/include/c++/11/algorithm \
+  /usr/include/c++/11/bits/stl_algo.h \
+  /usr/include/c++/11/bits/algorithmfwd.h \
+  /usr/include/c++/11/bits/stl_heap.h \
+  /usr/include/c++/11/bits/uniform_int_dist.h \
+  /usr/include/c++/11/pstl/glue_algorithm_defs.h \
+  /usr/include/c++/11/functional \
+  /usr/include/c++/11/bits/std_function.h \
+  /usr/include/c++/11/unordered_map \
+  /usr/include/c++/11/bits/hashtable.h \
+  /usr/include/c++/11/bits/hashtable_policy.h \
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/bits/node_handle.h \
+  /usr/include/c++/11/bits/unordered_map.h \
+  /usr/include/c++/11/bits/erase_if.h \
+  /usr/include/x86_64-linux-gnu/sys/socket.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
+  /usr/include/x86_64-linux-gnu/bits/socket.h \
+  /usr/include/x86_64-linux-gnu/bits/socket_type.h \
+  /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
+  /usr/include/x86_64-linux-gnu/asm/socket.h \
+  /usr/include/asm-generic/socket.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/x86_64-linux-gnu/asm/sockios.h \
+  /usr/include/asm-generic/sockios.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
+  /usr/include/netinet/in.h \
+  /usr/include/x86_64-linux-gnu/bits/in.h \
+  /usr/include/arpa/inet.h \
+  /usr/include/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/linux/close_range.h \
+  /usr/include/c++/11/fstream \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc \
+  /usr/include/mavsdk/mavsdk.h \
+  /usr/include/c++/11/optional \
+  /usr/include/mavsdk/autopilot.h \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc \
+  /usr/include/mavsdk/compatibility_mode.h \
+  /usr/include/mavsdk/deprecated.h \
+  /usr/include/mavsdk/handle.h \
+  /usr/include/mavsdk/system.h \
+  /usr/include/mavsdk/component_type.h \
+  /usr/include/mavsdk/vehicle.h \
+  /usr/include/mavsdk/mavlink_include.h \
+  /usr/include/mavsdk/mavlink/mavlink_types.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
+  /usr/include/mavsdk/mavlink/ardupilotmega/mavlink.h \
+  /usr/include/mavsdk/mavlink/ardupilotmega/version.h \
+  /usr/include/mavsdk/mavlink/ardupilotmega/ardupilotmega.h \
+  /usr/include/mavsdk/mavlink/protocol.h \
+  /usr/include/mavsdk/mavlink/mavlink_helpers.h \
+  /usr/include/mavsdk/mavlink/checksum.h \
+  /usr/include/mavsdk/mavlink/mavlink_conversions.h \
+  /usr/include/c++/11/math.h \
   /usr/include/mavsdk/mavlink/mavlink_sha256.h \
   /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_sensor_offsets.h \
   /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_set_mag_offsets.h \
@@ -618,8 +654,12 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
   /usr/include/mavsdk/plugin_base.h \
   /usr/include/mavsdk/plugins/telemetry/telemetry.h \
   /usr/include/mavsdk/plugins/offboard/offboard.h \
-  /usr/include/mavsdk/plugins/mission/mission.h
+  /usr/include/mavsdk/plugins/mission/mission.h \
+  /usr/include/mavsdk/plugins/failure/failure.h \
+  /usr/include/mavsdk/plugins/param/param.h
 
+
+/usr/include/mavsdk/plugins/failure/failure.h:
 
 /usr/include/mavsdk/plugins/telemetry/telemetry.h:
 
@@ -652,8 +692,6 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 /usr/include/mavsdk/mavlink/uAvionix/mavlink_msg_uavionix_adsb_out_control.h:
 
 /usr/include/mavsdk/mavlink/uAvionix/mavlink_msg_uavionix_adsb_get.h:
-
-/usr/include/mavsdk/mavlink/uAvionix/mavlink_msg_uavionix_adsb_out_cfg_flightid.h:
 
 /usr/include/mavsdk/mavlink/cubepilot/mavlink_msg_cubepilot_firmware_update_resp.h:
 
@@ -689,10 +727,6 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_illuminator_status.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_open_drone_id_authentication.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_current_mode.h:
-
 /usr/include/mavsdk/mavlink/common/mavlink_msg_available_modes.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_response_event_error.h:
@@ -721,47 +755,75 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_utm_global_position.h:
 
-/usr/include/string.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_raw_rpm.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_mission_current.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_cellular_config.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_logging_data_acked.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_isbd_link_status.h:
 
-/usr/include/mavsdk/mavlink/ardupilotmega/version.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_cellular_status.h:
 
-/usr/include/mavsdk/mavlink/ardupilotmega/mavlink.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_param_ext_ack.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_component_metadata.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_param_ext_set.h:
 
-/usr/include/c++/11/tr1/poly_laguerre.tcc:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_open_drone_id_self_id.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_param_ext_value.h:
 
-/usr/include/c++/11/bits/functexcept.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_param_ext_request_list.h:
 
-/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_hwstatus.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_uavcan_node_status.h:
 
-/usr/include/c++/11/bits/basic_ios.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_protocol_version.h:
 
-/usr/include/c++/11/bits/uniform_int_dist.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_uavcan_node_info.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_wind_cov.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_wifi_config_ap.h:
 
-/usr/include/mavsdk/plugin_base.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_trajectory_representation_waypoints.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_change_operator_control_ack.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_airspeed.h:
 
-/usr/include/c++/11/sstream:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_esc_status.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_terrain_report.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_manager_set_manual_control.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_battery_status.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_manager_set_pitchyaw.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_adsb_vehicle.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_autopilot_state_for_gimbal_device.h:
 
-/usr/include/mavsdk/autopilot.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_param_error.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_control_system_state.h:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_device_attitude_status.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_device_set_attitude.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_device_information.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_manager_set_attitude.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_manager_information.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_camera_thermal_range.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_open_drone_id_message_pack.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_camera_tracking_image_status.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_camera_fov_status.h:
+
+/usr/include/mavsdk/mavlink/uAvionix/mavlink_msg_uavionix_adsb_out_cfg_registration.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_video_stream_information.h:
+
+/usr/include/c++/11/bits/basic_ios.tcc:
+
+/usr/include/c++/11/bits/codecvt.h:
+
+/usr/include/c++/11/bits/hashtable_policy.h:
+
+/usr/include/c++/11/bits/hashtable.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_generator_status.h:
 
@@ -769,29 +831,49 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/c++/11/pstl/execution_defs.h:
 
+/usr/include/c++/11/tr1/riemann_zeta.tcc:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:
+
+/usr/include/c++/11/tr1/beta_function.tcc:
+
+/usr/include/c++/11/array:
+
+/usr/include/c++/11/bits/specfun.h:
+
+/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_osd_param_show_config.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_estimator_status.h:
+
+/usr/include/c++/11/bits/postypes.h:
+
+/usr/include/x86_64-linux-gnu/bits/in.h:
+
+/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_gimbal_control.h:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+/usr/include/mavsdk/mavlink/loweheiser/loweheiser.h:
+
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+
+/usr/include/c++/11/string_view:
+
+/usr/include/c++/11/bits/stl_algo.h:
+
 /usr/include/x86_64-linux-gnu/bits/math-vector.h:
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_led_control.h:
 
-/usr/include/c++/11/bits/stl_algo.h:
+/usr/include/c++/11/cstring:
 
-/usr/include/c++/11/bits/erase_if.h:
+/usr/include/x86_64-linux-gnu/asm/sockios.h:
 
-/usr/include/stdint.h:
+/usr/include/string.h:
 
-/usr/include/c++/11/bits/ptr_traits.h:
-
-/usr/include/c++/11/bits/hashtable_policy.h:
-
-/usr/include/c++/11/unordered_map:
-
-/usr/include/c++/11/bits/hashtable.h:
-
-/usr/include/c++/11/bits/basic_ios.tcc:
+/usr/include/mavsdk/mavlink/common/mavlink_msg_mission_current.h:
 
 /usr/include/c++/11/bits/stl_raw_storage_iter.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_device_set_attitude.h:
 
 /usr/include/mavsdk/mavlink/csAirLink/mavlink_msg_airlink_auth_response.h:
 
@@ -800,8 +882,6 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 /usr/include/mavsdk/mavlink/common/mavlink_msg_radio_status.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_set_home_position.h:
-
-/usr/include/c++/11/optional:
 
 /usr/include/c++/11/bits/vector.tcc:
 
@@ -825,21 +905,23 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_mission_item.h:
 
+/usr/include/mavsdk/plugin_base.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_change_operator_control_ack.h:
+
 /usr/include/c++/11/bits/shared_ptr_atomic.h:
 
 /usr/include/c++/11/bits/parse_numbers.h:
 
 /usr/include/c++/11/limits:
 
+/usr/include/linux/stddef.h:
+
 /usr/include/mavsdk/mavlink/common/mavlink_msg_camera_trigger.h:
 
 /usr/include/c++/11/bits/uses_allocator.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_terrain_data.h:
-
-/usr/include/c++/11/array:
-
-/usr/include/c++/11/tr1/beta_function.tcc:
 
 /usr/include/c++/11/bits/std_thread.h:
 
@@ -859,23 +941,31 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h:
 
-/usr/include/mavsdk/mavlink/mavlink_conversions.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_param_request_read.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_flight_information.h:
-
 /usr/include/c++/11/bits/streambuf_iterator.h:
 
 /usr/include/c++/11/cwctype:
+
+/usr/include/mavsdk/mavlink/uAvionix/mavlink_msg_uavionix_adsb_out_cfg.h:
+
+/usr/include/c++/11/tr1/poly_hermite.tcc:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_scaled_imu2.h:
 
 /usr/include/c++/11/bits/locale_facets.h:
 
 /usr/include/c++/11/bits/exception.h:
 
+/usr/include/c++/11/bits/basic_ios.h:
+
+/usr/include/c++/11/bits/uniform_int_dist.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_wind_cov.h:
+
+/usr/include/c++/11/tr1/bessel_function.tcc:
+
 /usr/include/c++/11/stdexcept:
+
+/usr/include/c++/11/pstl/glue_algorithm_defs.h:
 
 /usr/include/c++/11/utility:
 
@@ -883,9 +973,21 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_ping.h:
 
-/usr/include/mavsdk/mavlink/ardupilotmega/ardupilotmega.h:
+/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
+
+/usr/include/c++/11/bits/node_handle.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_gps_inject_data.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/error_constants.h:
+
+/usr/include/c++/11/tr1/ell_integral.tcc:
+
+/usr/include/mavsdk/vehicle.h:
 
 /usr/include/asm-generic/errno.h:
 
@@ -903,6 +1005,10 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/x86_64-linux-gnu/bits/errno.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_param_map_rc.h:
+
 /usr/include/c++/11/cerrno:
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_ahrs2.h:
@@ -919,9 +1025,11 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_optical_flow_rad.h:
 
-/usr/include/mavsdk/compatibility_mode.h:
-
 /usr/include/c++/11/bits/shared_ptr.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
+
+/usr/include/c++/11/bits/stl_construct.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_link_node_status.h:
 
@@ -935,11 +1043,13 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/c++/11/ext/aligned_buffer.h:
 
-/usr/include/x86_64-linux-gnu/sys/types.h:
-
 /usr/include/mavsdk/mavlink/common/mavlink_msg_mission_ack.h:
 
-/usr/include/c++/11/math.h:
+/usr/include/stdint.h:
+
+/usr/include/c++/11/bits/ptr_traits.h:
+
+/usr/include/c++/11/bits/erase_if.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
@@ -953,13 +1063,19 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/ctype.h:
 
-/usr/include/mavsdk/mavlink/mavlink_types.h:
-
-/usr/include/c++/11/initializer_list:
+/usr/include/mavsdk/mavlink/ardupilotmega/ardupilotmega.h:
 
 /usr/include/c++/11/streambuf:
 
 /usr/include/c++/11/bits/concept_check.h:
+
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_ais_vessel.h:
+
+/usr/include/mavsdk/mavlink_include.h:
+
+/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_hwstatus.h:
 
 /usr/include/c++/11/bits/string_view.tcc:
 
@@ -973,25 +1089,17 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
 
-/usr/include/c++/11/bits/exception_defines.h:
+/usr/include/x86_64-linux-gnu/asm/posix_types_64.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h:
 
+/usr/include/x86_64-linux-gnu/bits/environments.h:
+
 /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
 
-/usr/include/c++/11/string_view:
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_param_map_rc.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
-
-/usr/include/c++/11/bits/stl_construct.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
-
-/usr/include/mavsdk/mavlink/loweheiser/loweheiser.h:
-
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+/usr/include/c++/11/ext/string_conversions.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_open_drone_id_basic_id.h:
 
@@ -1007,6 +1115,12 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_gps_status.h:
 
+/usr/include/mavsdk/mavlink/common/mavlink_msg_component_metadata.h:
+
+/usr/include/c++/11/tr1/poly_laguerre.tcc:
+
+/usr/include/mavsdk/mavlink/ardupilotmega/mavlink.h:
+
 /usr/include/mavsdk/mavlink/common/mavlink_msg_current_event_sequence.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_onboard_computer_status.h:
@@ -1020,10 +1134,6 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 /usr/include/c++/11/bits/stl_iterator_base_types.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
-
-/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_wind.h:
-
-/usr/include/c++/11/bits/stl_tempbuf.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
@@ -1039,15 +1149,13 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/c++/11/bits/stl_algobase.h:
 
+/usr/include/unistd.h:
+
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h:
 
 /usr/include/c++/11/cwchar:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_camera_thermal_range.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/long-double.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
@@ -1069,8 +1177,6 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_set_position_target_local_ned.h:
 
-/usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:
-
 /usr/include/c++/11/bits/ostream_insert.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
@@ -1088,10 +1194,6 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
 
 /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
-
-/usr/include/c++/11/bits/node_handle.h:
-
-/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
 /usr/include/c++/11/tr1/gamma.tcc:
 
@@ -1119,13 +1221,11 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/c++/11/bits/atomic_base.h:
 
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_mission_item_reached.h:
-
 /usr/include/c++/11/ext/numeric_traits.h:
 
 /usr/include/c++/11/bits/memoryfwd.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h:
 
 /usr/include/stdc-predef.h:
 
@@ -1173,15 +1273,21 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_set_actuator_control_target.h:
 
+/usr/include/mavsdk/mavlink/common/mavlink_msg_manual_setpoint.h:
+
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
 /usr/include/c++/11/cstdint:
 
-/usr/include/c++/11/bits/postypes.h:
-
-/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_gimbal_control.h:
-
 /usr/include/c++/11/bits/invoke.h:
+
+/usr/include/x86_64-linux-gnu/sys/types.h:
+
+/usr/include/asm-generic/socket.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_obstacle_distance.h:
+
+/usr/include/c++/11/exception:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h:
 
@@ -1211,6 +1317,12 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_vision_position_delta.h:
 
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/mavsdk/mavlink/mavlink_conversions.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_param_request_read.h:
+
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
 /usr/include/c++/11/bits/stl_iterator.h:
@@ -1227,19 +1339,9 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/c++/11/clocale:
 
-/usr/include/c++/11/bits/predefined_ops.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_smart_battery_info.h:
-
-/usr/include/mavsdk/mavlink/protocol.h:
-
-/usr/include/x86_64-linux-gnu/bits/typesizes.h:
-
 /usr/include/x86_64-linux-gnu/bits/sched.h:
 
 /usr/include/c++/11/ext/alloc_traits.h:
-
-/usr/include/c++/11/bits/unordered_map.h:
 
 /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
 
@@ -1247,9 +1349,17 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
+/usr/include/c++/11/unordered_map:
+
 /usr/include/c++/11/cctype:
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_mission_item_reached.h:
+
+/usr/include/x86_64-linux-gnu/asm/socket.h:
 
 /usr/include/c++/11/bits/atomic_lockfree_defines.h:
 
@@ -1261,23 +1371,17 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/locale.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_trajectory_representation_waypoints.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_airspeed.h:
-
 /usr/include/mavsdk/mavlink/common/mavlink_msg_esc_info.h:
 
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
-/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_device_op_write.h:
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
-/usr/include/mavsdk/vehicle.h:
+/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_gopro_set_response.h:
 
-/usr/include/x86_64-linux-gnu/c++/11/bits/error_constants.h:
-
-/usr/include/c++/11/tr1/ell_integral.tcc:
+/usr/include/c++/11/bits/ios_base.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_memory_vect.h:
 
@@ -1301,9 +1405,15 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
 
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
+
 /usr/include/c++/11/bits/stl_pair.h:
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_rally_point.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_param_ext_request_read.h:
+
+/usr/include/c++/11/ext/atomicity.h:
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
@@ -1321,17 +1431,11 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_gps2_rtk.h:
 
-/usr/include/c++/11/tr1/legendre_function.tcc:
-
-/usr/include/mavsdk/mavlink/mavlink_helpers.h:
-
 /usr/include/c++/11/bits/allocated_ptr.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_log_erase.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_isbd_link_status.h:
 
 /usr/include/c++/11/ext/new_allocator.h:
 
@@ -1355,6 +1459,18 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
 
+/usr/include/mavsdk/mavlink/common/mavlink_msg_trajectory_representation_bezier.h:
+
+/usr/include/mavsdk/deprecated.h:
+
+/usr/include/c++/11/bits/locale_classes.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_vfr_hud.h:
+
+/usr/include/c++/11/tr1/hypergeometric.tcc:
+
+/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_gopro_get_response.h:
+
 /usr/include/math.h:
 
 /usr/include/c++/11/bits/charconv.h:
@@ -1365,7 +1481,31 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
 
+/usr/include/mavsdk/mavlink/common/mavlink_msg_flight_information.h:
+
+/usr/include/c++/11/algorithm:
+
+/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_compassmot_status.h:
+
+/usr/include/x86_64-linux-gnu/sys/socket.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_mission_request_partial_list.h:
+
+/usr/include/mavsdk/plugins/offboard/offboard.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_odometry.h:
+
+/usr/include/c++/11/backward/binders.h:
+
+/usr/include/x86_64-linux-gnu/asm/bitsperlong.h:
+
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_actuator_output_status.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
+/usr/include/x86_64-linux-gnu/bits/endian.h:
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_gimbal_report.h:
 
@@ -1377,61 +1517,123 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_log_request_end.h:
 
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
-
-/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_gps_inject_data.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_actuator_output_status.h:
-
-/usr/include/x86_64-linux-gnu/bits/endian.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
-
-/usr/include/c++/11/ext/string_conversions.h:
-
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_uavcan_node_status.h:
-
-/usr/include/c++/11/bits/specfun.h:
-
-/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_osd_param_show_config.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_estimator_status.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_manual_setpoint.h:
-
-/usr/include/c++/11/tr1/bessel_function.tcc:
-
 /usr/include/c++/11/tr1/exp_integral.tcc:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_vfr_hud.h:
+/usr/include/c++/11/bits/unordered_map.h:
 
-/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_gopro_get_response.h:
+/usr/include/x86_64-linux-gnu/bits/long-double.h:
 
-/usr/include/c++/11/tr1/hypergeometric.tcc:
+/usr/include/x86_64-linux-gnu/bits/socket.h:
+
+/usr/include/c++/11/bits/exception_defines.h:
+
+/usr/include/x86_64-linux-gnu/bits/socket_type.h:
+
+/usr/include/x86_64-linux-gnu/bits/sockaddr.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_video_stream_status.h:
+
+/usr/include/x86_64-linux-gnu/asm/posix_types.h:
+
+/usr/include/mavsdk/mavlink/uAvionix/mavlink_msg_uavionix_adsb_out_cfg_flightid.h:
+
+/usr/include/asm-generic/posix_types.h:
+
+/usr/include/c++/11/bits/fstream.tcc:
+
+/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_wind.h:
+
+/usr/include/c++/11/bits/stl_tempbuf.h:
+
+/usr/include/asm-generic/sockios.h:
+
+/usr/include/c++/11/bits/predefined_ops.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h:
+
+/usr/include/netinet/in.h:
+
+/usr/include/arpa/inet.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
+
+/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_device_op_write.h:
+
+/usr/include/x86_64-linux-gnu/bits/confname.h:
+
+/usr/include/c++/11/bits/functexcept.h:
+
+/usr/include/x86_64-linux-gnu/bits/getopt_core.h:
+
+/usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_open_drone_id_authentication.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_current_mode.h:
+
+/usr/include/linux/close_range.h:
+
+/usr/include/c++/11/fstream:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_mission_set_current.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_sys_status.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h:
+
+/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_battery2.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_canfd_frame.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_local_position_ned_system_global_offset.h:
+
+/usr/include/c++/11/optional:
+
+/usr/include/mavsdk/autopilot.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_control_system_state.h:
+
+/usr/include/c++/11/sstream:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_terrain_report.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_battery_status.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_adsb_vehicle.h:
+
+/usr/include/mavsdk/compatibility_mode.h:
+
+/usr/include/c++/11/initializer_list:
+
+/usr/include/mavsdk/mavlink/mavlink_types.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h:
+
+/usr/include/mavsdk/mavlink/ardupilotmega/version.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_smart_battery_info.h:
+
+/usr/include/x86_64-linux-gnu/bits/typesizes.h:
+
+/usr/include/mavsdk/mavlink/protocol.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_logging_data_acked.h:
+
+/usr/include/c++/11/tr1/legendre_function.tcc:
+
+/usr/include/mavsdk/mavlink/mavlink_helpers.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_optical_flow.h:
 
-/usr/include/mavsdk/mavlink/checksum.h:
-
 /usr/include/c++/11/tr1/modified_bessel_func.tcc:
 
-/usr/include/c++/11/bits/ios_base.h:
+/usr/include/mavsdk/mavlink/checksum.h:
 
-/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_gopro_set_response.h:
+/usr/include/c++/11/math.h:
 
-/usr/include/mavsdk/mavlink/uAvionix/mavlink_msg_uavionix_adsb_out_cfg.h:
-
-/usr/include/c++/11/tr1/poly_hermite.tcc:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_scaled_imu2.h:
-
-/usr/include/c++/11/tr1/riemann_zeta.tcc:
+/usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_data64.h:
 
@@ -1457,6 +1659,8 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_manager_status.h:
 
+/usr/include/linux/posix_types.h:
+
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_digicam_control.h:
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_mount_configure.h:
@@ -1467,11 +1671,13 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_fence_point.h:
 
+/usr/include/mavsdk/mavlink/common/mavlink_msg_camera_tracking_geo_status.h:
+
+/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_ahrs.h:
+
 /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_simstate.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_manager_set_manual_control.h:
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_radio.h:
 
@@ -1485,8 +1691,6 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_data16.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_cellular_config.h:
-
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_data32.h:
 
 /usr/include/stdlib.h:
@@ -1497,25 +1701,15 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_vibration.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_camera_image_captured.h:
-
 /usr/include/c++/11/bits/stl_function.h:
+
+/usr/include/mavsdk/mavlink/common/mavlink_msg_camera_image_captured.h:
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_rally_fetch_point.h:
 
+/usr/include/mavsdk/plugins/param/param.h:
+
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_mcu_status.h:
-
-/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_compassmot_status.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_mission_request_partial_list.h:
-
-/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_battery2.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_canfd_frame.h:
-
-/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_local_position_ned_system_global_offset.h:
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_remote_log_data_block.h:
 
@@ -1523,11 +1717,9 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_mag_cal_progress.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_param_ext_ack.h:
+/usr/include/c++/11/iostream:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
-
-/usr/include/c++/11/iostream:
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_ekf_status_report.h:
 
@@ -1565,27 +1757,21 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_esc_telemetry_25_to_28.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_sys_status.h:
-
 /usr/include/mavsdk/mavlink/common/mavlink_msg_gps_input.h:
 
 /usr/include/c++/11/bits/localefwd.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_auth_key.h:
 
-/usr/include/endian.h:
-
 /usr/include/c++/11/bits/cpp_type_traits.h:
+
+/usr/include/endian.h:
 
 /usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_secure_command_reply.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_camera_settings.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_set_mode.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_open_drone_id_message_pack.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_camera_tracking_image_status.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_param_request_list.h:
 
@@ -1617,15 +1803,11 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_efi_status.h:
 
-/usr/include/mavsdk/mavlink/common/mavlink_msg_mission_set_current.h:
-
 /usr/include/mavsdk/mavlink/common/mavlink_msg_mission_count.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_mission_clear_all.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_set_gps_global_origin.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_esc_status.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_safety_allowed_area.h:
 
@@ -1719,10 +1901,6 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_scaled_imu3.h:
 
-/usr/include/mavsdk/mavlink/ardupilotmega/mavlink_msg_ahrs.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_camera_tracking_geo_status.h:
-
 /usr/include/mavsdk/mavlink/common/mavlink_msg_data_transmission_handshake.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_orbit_execution_status.h:
@@ -1734,8 +1912,6 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 /usr/include/mavsdk/mavlink/common/mavlink_msg_encapsulated_data.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_distance_sensor.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_manager_set_attitude.h:
 
 /usr/include/mavsdk/mavsdk.h:
 
@@ -1794,65 +1970,3 @@ CMakeFiles/Swarm_Manager_Node.dir/Swarm_Manager_Node.cpp.o: ../Swarm_Manager_Nod
 /usr/include/mavsdk/mavlink/common/mavlink_msg_camera_capture_status.h:
 
 /usr/include/mavsdk/mavlink/common/mavlink_msg_logging_data.h:
-
-/usr/include/mavsdk/mavlink/uAvionix/mavlink_msg_uavionix_adsb_out_cfg_registration.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_video_stream_information.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_video_stream_status.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_camera_fov_status.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_manager_information.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_device_information.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_param_error.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_device_attitude_status.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_autopilot_state_for_gimbal_device.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_gimbal_manager_set_pitchyaw.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_protocol_version.h:
-
-/usr/include/mavsdk/mavlink_include.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_ais_vessel.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_wifi_config_ap.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_uavcan_node_info.h:
-
-/usr/include/c++/11/ext/atomicity.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_param_ext_request_read.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_param_ext_request_list.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_open_drone_id_self_id.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_param_ext_value.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_param_ext_set.h:
-
-/usr/include/c++/11/exception:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_obstacle_distance.h:
-
-/usr/include/mavsdk/plugins/offboard/offboard.h:
-
-/usr/include/c++/11/backward/binders.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_odometry.h:
-
-/usr/include/mavsdk/deprecated.h:
-
-/usr/include/c++/11/bits/locale_classes.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_trajectory_representation_bezier.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_cellular_status.h:
-
-/usr/include/mavsdk/mavlink/common/mavlink_msg_raw_rpm.h:
