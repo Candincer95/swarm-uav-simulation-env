@@ -105,3 +105,9 @@ The simulation features a comprehensive Qt-based GUI that acts as an environment
 
 **Expected Output:**
 The swarm will maintain a locked comb formation despite environmental interference. Once any individual UAV's FOV intersects with the dynamically generated fire ground-truth coordinates, the system calculates the Euclidean distance and halts the search. The GUI will instantly output a critical alert: **"FIRE DETECTED"**, pinpointing the discovering UAV ID and the exact X/Y Cartesian coordinates of the hazard.
+
+## Simulation Demo Video
+
+[![Swarm UAV Simulation Demo](https://img.youtube.com/vi/tb9ah8XswYI/0.jpg)](https://youtu.be/tb9ah8XswYI)
+
+*Click the image above to watch the autonomous swarm sweep algorithm and fire detection in action.*
