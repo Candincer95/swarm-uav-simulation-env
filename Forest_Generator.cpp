@@ -148,35 +148,48 @@ int main() {
     std::mt19937 gen(rd()); // MERSENNE TWISTER ALGORITHM FOR RANDOM TREE LOCATIONS
     std::uniform_real_distribution<float> dis_x(-80.0f, 80.0f); // Width = 160m
     std::uniform_real_distribution<float> dis_y(10.0f, 150.0f); // Depth = 140m
+    // Scale multiplier
+    std::uniform_real_distribution<float> dis_scale(0.7f, 1.5f); // Between 70% and 150%
 
     int tree_count = 250;
     for (int i = 0; i < tree_count; ++i) {
         float x = dis_x(gen);
         float y = dis_y(gen);
+        float scale = dis_scale(gen);
+        
+        // Trunk calculations (cylinder)
+        float trunk_radius = 0.4f * scale;
+        float trunk_length = 5.0f * scale;
+        float trunk_z = 2.5 * scale;
+
+        // Leaves calculations (cone)
+        float leaves_radius = 2.5f * scale;
+        float leaves_length = 7.0f * scale;
+        float leaves_z = 8.5f * scale; // The height required for it to sit on top of the trunk is (5 + 3.5 = 8.5)
 
         file << "    <model name=\"tree_" << i << "\">\n"
              << "      <static>true</static>\n"
              << "      <pose>" << std::fixed << std::setprecision(2) << x << " " << y << " 0 0 0 0</pose>\n"
              << "      <link name=\"link\">\n"
              << "        <collision name=\"trunk_col\">\n"
-             << "          <pose>0 0 2.5 0 0 0</pose>\n"
-             << "          <geometry><cylinder><radius>0.4</radius><length>5</length></cylinder></geometry>\n"
+             << "          <pose>0 0 " << trunk_z << " 0 0 0</pose>\n"
+             << "          <geometry><cylinder><radius>" << trunk_radius << "</radius><length>" << trunk_length << "</length></cylinder></geometry>\n"
              << "        </collision>\n"
              << "        <visual name=\"trunk_vis\">\n"
-             << "          <pose>0 0 2.5 0 0 0</pose>\n"
-             << "          <geometry><cylinder><radius>0.4</radius><length>5</length></cylinder></geometry>\n"
+             << "          <pose>0 0 " << trunk_z << " 0 0 0</pose>\n"
+             << "          <geometry><cylinder><radius>" << trunk_radius << "</radius><length>" << trunk_length << "</length></cylinder></geometry>\n"
              << "          <material>\n"
              << "            <ambient>0.3 0.15 0.05 1</ambient>\n"
              << "            <diffuse>0.3 0.15 0.05 1</diffuse>\n"
              << "          </material>\n"
              << "        </visual>\n"
              << "        <collision name=\"leaves_col\">\n"
-             << "          <pose>0 0 8.5 0 0 0</pose>\n"
-             << "          <geometry><cone><radius>2.5</radius><length>7</length></cone></geometry>\n"
+             << "          <pose>0 0 " << leaves_z << " 0 0 0</pose>\n"
+             << "          <geometry><cone><radius>" << leaves_radius << "</radius><length>" << leaves_length << "</length></cone></geometry>\n"
              << "        </collision>\n"
              << "        <visual name=\"leaves_vis\">\n"
-             << "          <pose>0 0 8.5 0 0 0</pose>\n"
-             << "          <geometry><cone><radius>2.5</radius><length>7</length></cone></geometry>\n"
+             << "          <pose>0 0 " << leaves_z << " 0 0 0</pose>\n"
+             << "          <geometry><cone><radius>" << leaves_radius << "</radius><length>" << leaves_length << "</length></cone></geometry>\n"
              << "          <material>\n"
              << "            <ambient>0.0 0.4 0.0 1</ambient>\n"
              << "            <diffuse>0.0 0.4 0.0 1</diffuse>\n"
