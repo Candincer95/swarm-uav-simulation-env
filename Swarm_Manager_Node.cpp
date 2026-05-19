@@ -11,6 +11,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <fstream>
+#include <iomanip>
 
 #include <mavsdk/mavsdk.h>
 #include <mavsdk/plugins/action/action.h>
@@ -55,6 +56,9 @@ class SwarmManager {
         Mavsdk mavsdk;
         std::vector<std::shared_ptr<DroneNode>> fleet;
         std::vector<std::shared_ptr<mavsdk::Mission>> mission_plugins;
+        // Added for collision avoidance
+        std::vector<std::shared_ptr<mavsdk::Telemetry>> telemetry_plugins;
+        std::vector<std::shared_ptr<mavsdk::Action>> action_plugins;
         bool is_formation_active = false;
 
     public:
@@ -176,6 +180,12 @@ class SwarmManager {
                 auto mission_plugin = std::make_shared<mavsdk::Mission>(fleet[i]->system);
                 mission_plugins.push_back(mission_plugin);
 
+                auto telemetry_plugin = std::make_shared<mavsdk::Telemetry>(fleet[i]->system);
+                telemetry_plugins.push_back(telemetry_plugin);
+
+                auto action_plugin = std::make_shared<mavsdk::Action>(fleet[i]->system);
+                action_plugins.push_back(action_plugin);
+
                 // Waiting 500 miliseconds for communication channel ready
                 std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
@@ -229,6 +239,44 @@ class SwarmManager {
                     mission_plugin->start_mission();
                 } else {
                     std::cout << "[ERROR] Mission upload failed for Drone " << i << ": " << upload_result << std::endl;
+                }
+            }
+        }
+
+        // COLLISION AVOIDANCE
+        void check_swarm_collision() {
+            const float safety_radius = 5.0f; // 5 meters safety border
+            const float evasion_alt = 35.0f; // A safe upper altitude to escape to in case of collision
+            int num_drones = fleet.size();
+
+            // Loop that compares each drone to all other drones 
+            for (int i = 0; i < num_drones; ++i) {
+                for (int j = i + 1; j < num_drones; ++j) {
+
+                    // Real-time GPS and altitude data
+                    auto pos1 = telemetry_plugins[i]->position();
+                    auto pos2 = telemetry_plugins[j]->position();
+
+                    // Converting GPS degrees to meters
+                    float dx = (pos2.longitude_deg - pos1.longitude_deg) * 75440.0f;
+                    float dy = (pos2.latitude_deg - pos1.latitude_deg) *111320.0f;
+                    float dz = pos2.relative_altitude_m - pos1.relative_altitude_m;
+
+                    // 3-Dimensional Euclidean distance
+                    float distance = std::sqrt(dx*dx + dy*dy + dz*dz);
+
+                    // If the drones get closer than 5 meters to each other
+                    if (distance < safety_radius) {
+                        std::cout << "\n[CRITICAL WARNING] COLLISION RISK DETECTED!" << std::endl;
+                        std::cout << "->Drone " << i << " and Drone " << j << " are too close: "
+                                  << std::fixed << std::setprecision(2) << distance << "m apart." << std::endl;
+
+                        std::cout << "[ATC] Executing Evasion Maneuver: Drone " << j
+                                  << " climbing to " << evasion_alt << "m!" << std::endl;
+                        
+                        action_plugins[j]->goto_location(pos2.latitude_deg, pos2.longitude_deg, evasion_alt, 0);
+                    }
+
                 }
             }
         }
@@ -541,7 +589,8 @@ int main() {
 
     // TRANSIT (FORMATION MODE)
     // Drones align side-by-side and fly to the fire zone for 20 seconds
-    manager.mode_LineAbreastFormation(20);
+    // Choosing one of the formations is optional
+    //manager.mode_LineAbreastFormation(20);
 
     // TRIANGLE (V-SHAPE) FORMATION
     manager.mode_TriangleFormation(15);
@@ -553,7 +602,10 @@ int main() {
     // Keep the program running
     std::cout << "\n[SYSTEM] Operation manager active. Press Ctrl+C to exit." << std::endl;
     while (true) {
-        sleep_for(seconds(10));
+
+        manager.check_swarm_collision();
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    
     }
 
     return 0;
