@@ -39,7 +39,7 @@ sleep 6
 
 
 echo "[SYSTEM] 4.5. Launching GUI Control Panel..."
-GUI_PATH="$HOME/swarm-uav-simulation-env/gui_control/gui_panel"
+GUI_PATH="$HOME/swarm-uav-simulation-env/build/gui_panel"
 if [ -f "$GUI_PATH" ]; then
     $GUI_PATH &
     echo "[OK] GUI Panel opened successfully."

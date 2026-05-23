@@ -5,7 +5,7 @@
 #include <random>
 #include <iomanip>
 
-int main() {
+int main(int argc, char** argv) {
     // SAVE FILE DIRECTLY TO 'WORLDS' DIRECTORY
     std::string home_dir = getenv("HOME");
     std::string output_path = home_dir + "/swarm-uav-simulation-env/worlds/Forest_world.sdf";
@@ -89,19 +89,19 @@ int main() {
          << "    <include>\n"
          << "      <name>x500_001</name>\n"
          << "      <uri>model://x500_depth</uri>\n"
-         << "      <pose>0 0 1 0 0 0</pose>\n"
+         << "      <pose>0 0 0.2 0 0 0</pose>\n"
          << "    </include>\n\n"
          << "    \n"
          << "    <include>\n"
          << "      <name>x500_002</name>\n"
          << "      <uri>model://x500_depth</uri>\n"
-         << "      <pose>0 4 1 0 0 0</pose>\n"
+         << "      <pose>0 4 0.2 0 0 0</pose>\n"
          << "    </include>\n\n"
          << "    \n"
          << "    <include>\n"
          << "      <name>x500_003</name>\n"
          << "      <uri>model://x500_depth</uri>\n"
-         << "      <pose>0 -4 1 0 0 0</pose>\n"
+         << "      <pose>0 -4 0.2 0 0 0</pose>\n"
          << "    </include>\n\n";
 
     // WINDSOCK FLAG
@@ -144,8 +144,20 @@ int main() {
          << "    </model>\n\n";
 
     // PROCEDURAL TREE GENERATION
-    std::random_device rd;
-    std::mt19937 gen(rd()); // MERSENNE TWISTER ALGORITHM FOR RANDOM TREE LOCATIONS
+    unsigned int seed;
+
+    if (argc > 1) {
+     seed = std::stoul(argv[1]);
+     std::cout << "[FOREST GENERATION] Deterministic mode active. Using seed: " << seed << std::endl;
+    }
+    else {
+     std::random_device rd;
+     seed = rd();
+     std::cout << "[FOREST GENERATOR] Random mode active. Generated seed: " << seed << std::endl;
+     std::cout << "[TIP] Use './Forest_Generator " << seed << "' to reproduce this exact forest!" << std::endl;
+     
+    }
+    std::mt19937 gen(seed); // MERSENNE TWISTER ALGORITHM BOUND TO THE SEED
     std::uniform_real_distribution<float> dis_x(-80.0f, 80.0f); // Width = 160m
     std::uniform_real_distribution<float> dis_y(10.0f, 150.0f); // Depth = 140m
     // Scale multiplier
@@ -232,8 +244,9 @@ int main() {
          << "            <emissive>1.0 0.2 0.0 1</emissive>\n"
          << "          </material>\n"
          << "          \n"
-         << "          <plugin filename=\"gz-sim-thermal-system\" name=\"gz::sim::systems::Thermal\">\n"
+         << "          <plugin filename=\"libgazebo_ros_thermal_sensor.so\" name=\"thermal_sensor_plugin\">\n"
          << "            <temperature>1200.0</temperature>\n"
+         << "            <heat_signature>1200.0</heat_signature>\n"
          << "          </plugin>\n"
          << "        </visual>\n"
          << "        <light name=\"fire_light\" type=\"point\">\n"
