@@ -23,10 +23,10 @@ This project is developed and tested on the following technology stack:
 ## 4. Installation Guide
 
 **1. Clone the repository:**
-By default, the simulation expects the repository to be located at $HOME/swarm-uav-simulation-env. If you clone it to a different directory, you must set the SWARM_UAV_ROOT environment variable.
+By default, the simulation expects the repository to be located at `$HOME/swarm-uav-simulation-env`. If you clone it to a different directory, you must set the `SWARM_UAV_ROOT` environment variable.
 
 ```bash
-git clone https://github.com/Candincer95/swarm-uav-simulation-env.git
+git clone [https://github.com/Candincer95/swarm-uav-simulation-env.git](https://github.com/Candincer95/swarm-uav-simulation-env.git)
 cd swarm-uav-simulation-env
 export SWARM_UAV_ROOT=$(pwd)  # Run this if not cloned to your $HOME directory
 
@@ -45,7 +45,7 @@ make
 ## 5. How to Run the Simulation
 
 **Step 1: Generate a Custom Forest Environment (Optional)**
-The repository comes with a default world, but you can procedurally generate a brand new forest with randomized tree placements and a new fire ground-truth location. The generator also supports dynamic vehicle spawning. 
+The repository comes with a default world, but you can procedurally generate a brand new forest with randomized tree placements and a new fire ground-truth location. The generator also supports dynamic vehicle spawning.
 
 **Note on Reproducibility:** Every procedurally generated forest is tied to a specific seed value, which is printed to the console upon generation. If you need to run multiple experiments on the exact same terrain, you can effortlessly recreate a previously generated forest by providing its specific seed.
 
@@ -58,17 +58,26 @@ cd build
 
 
 **Step 2: Start the Physical Environment (Gazebo Harmonic & PX4)**
-Open a terminal, navigate to your `PX4-Autopilot` directory, and spawn the multi-vehicle simulation using our custom environment:
+Before running the simulation for the first time, you must link your custom procedural world to PX4's internal world directory. Open a terminal and create a symlink (this only needs to be done once):
 
 ```bash
-export PX4_GZ_WORLD=forest
+ln -sf ~/swarm-uav-simulation-env/worlds/Forest_world.sdf ~/PX4-Autopilot/Tools/simulation/gz/worlds/Forest_world.sdf
+
+```
+
+Now, navigate to your `PX4-Autopilot` directory and spawn the multi-vehicle simulation using your newly linked custom environment:
+
+```bash
+cd ~/PX4-Autopilot
+export PX4_GZ_WORLD=Forest_world
 Tools/simulation/gz/sitl_multiple_run.sh -n 3
 
 ```
-**Note:** The default swarm size is 3. If you wish to scale the system down for single-drone baseline testing, please read Section 9 for the required architectural parameter synchronizations before changing the -n flag.
+
+**Note:** The default swarm size is 3. If you wish to scale the system down for single-drone baseline testing, please read Section 9 for the required architectural parameter synchronizations before changing the `-n` flag.
 
 **Step 3: Execute the Swarm Manager**
-Once the drones are spawned, open a new terminal in this repository's root directory. The script will automatically handle zombie UDP processes (Address already in use errors):
+Once the drones are spawned, open a new terminal in this repository's root directory. The script will automatically handle zombie UDP processes (`Address already in use` errors):
 
 ```bash
 chmod +x launch.sh
