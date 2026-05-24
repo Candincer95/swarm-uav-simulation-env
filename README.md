@@ -11,24 +11,30 @@ The system completely bypasses the standard ROS 2 overhead for highly stable net
 * **Simulation Engine:** Gazebo Harmonic (Procedural World & Physics) <--> PX4-Autopilot (SITL Flight Stack).
 * **Swarm Manager (C++ Node):** Communicates with PX4 via MAVLink (UDP). Handles the Unified Comb Sweep Algorithm, staggered deployment, and formation locking.
 * **Control Center (Qt GUI):** Listens to telemetry data via UDP sockets, visualizing the drone footprints and allowing dynamic parameter injection back into the simulation.
-
 ## 3. Dependencies & System Requirements
 This project is developed and tested on the following technology stack:
-
 * **OS:** Ubuntu 22.04 LTS
-* **Flight Stack:** PX4-Autopilot (SITL v1.14+)
-* **Simulation:** Gazebo Harmonic
-* **Dependencies:** MAVSDK (C++), CMake (v3.10+), GCC (C++17), Qt (for GUI)
+* **Simulation & Flight Stack:** PX4-Autopilot (v1.14+) with Gazebo Harmonic
+* **Libraries:** MAVSDK (C++), CMake (v3.10+), GCC (C++17), Qt5 (for GUI)
+
+**Prerequisite Installation:**
+Before installing this Swarm environment, ensure you have PX4 and Gazebo Harmonic installed on your system.
+```bash
+# 1. Clone PX4 (Ensure it's in your $HOME directory)
+git clone [https://github.com/PX4/PX4-Autopilot.git](https://github.com/PX4/PX4-Autopilot.git) --recursive ~/PX4-Autopilot
+# 2. Run the official PX4 setup script (Installs Gazebo Harmonic & Toolchains)
+bash ~/PX4-Autopilot/Tools/setup/ubuntu.sh
+
+```
 
 ## 4. Installation Guide
 
 **1. Clone the repository:**
-By default, the simulation expects the repository to be located at `$HOME/swarm-uav-simulation-env`. If you clone it to a different directory, you must set the `SWARM_UAV_ROOT` environment variable.
+Thanks to the relative path architecture, you can clone and run this repository in any directory on your system.
 
 ```bash
 git clone [https://github.com/Candincer95/swarm-uav-simulation-env.git](https://github.com/Candincer95/swarm-uav-simulation-env.git)
 cd swarm-uav-simulation-env
-export SWARM_UAV_ROOT=$(pwd)  # Run this if not cloned to your $HOME directory
 
 ```
 
@@ -58,10 +64,10 @@ cd build
 
 
 **Step 2: Start the Physical Environment (Gazebo Harmonic & PX4)**
-Before running the simulation for the first time, you must link your custom procedural world to PX4's internal world directory. Open a terminal and create a symlink (this only needs to be done once):
+Before running the simulation for the first time, you must link your custom procedural world to PX4's internal world directory. Open a terminal in the root directory of this project (`swarm-uav-simulation-env`) and create a symlink (this only needs to be done once):
 
 ```bash
-ln -sf ~/swarm-uav-simulation-env/worlds/Forest_world.sdf ~/PX4-Autopilot/Tools/simulation/gz/worlds/Forest_world.sdf
+ln -sf $(pwd)/worlds/Forest_world.sdf ~/PX4-Autopilot/Tools/simulation/gz/worlds/Forest_world.sdf
 
 ```
 
