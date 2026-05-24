@@ -65,11 +65,10 @@ export PX4_GZ_WORLD=forest
 Tools/simulation/gz/sitl_multiple_run.sh -n 3
 
 ```
-**CRITICAL WARNING FOR SCALABILITY TESTS:** > The system is fully scalable (from 1 to N drones) for baseline testing. However, the number of spawned vehicles must strictly match across the architecture. If you change the -n 3 parameter above to -n 1 (for a single drone test), you must also update:
-
-* **1.** int TARGET_DRONES = 1; in Swarm_Manager_Node.cpp
-
-* **2.** int drone_count = 1; in Forest_Generator.cpp (and regenerate the forest).
+> **CRITICAL WARNING FOR SCALABILITY TESTS:**
+> The system is fully scalable (from 1 to N drones) for baseline testing. However, the number of spawned vehicles must strictly match across the architecture. If you change the `-n 3` parameter above to `-n 1` (for a single drone test), you **must** also update:
+> 1. `size_t TARGET_DRONES = 1;` in `Swarm_Manager_Node.cpp`
+> 2. `int drone_count = 1;` in `Forest_Generator.cpp` (and regenerate the forest).
 
 **Step 3: Execute the Swarm Manager**
 Once the drones are spawned, open a new terminal in this repository's root directory. The script will automatically handle zombie UDP processes (Address already in use errors):
