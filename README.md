@@ -119,6 +119,14 @@ The simulation features a comprehensive Qt-based GUI that acts as an environment
 **Expected Output:**
 The swarm will execute a staggered deployment and maintain a locked comb formation despite environmental interference. Once any individual UAV's geometric proximity radius intersects with the hidden fire ground-truth coordinates, the system halts the autonomous mission. The GUI will instantly output a critical alert: "FIRE DETECTED", pinpointing the discovering UAV ID and the exact X/Y Cartesian coordinates of the hazard.
 
+## 9. System Scalability & Known Limitations
+
+The Swarm Manager architecture (UDP MAVLink routing, telemetry broadcasting, and independent node tracking) is theoretically scalable to $N$ drones. However, for stable reproduction and physical validation, the current optimal baseline is restricted to **1 to 3 UAVs**.
+
+* **Hardware Constraints & Physics Dilation (Gazebo RTF):** Running multiple PX4 SITL instances concurrently with Gazebo Harmonic's physics engine is intensely CPU-bound. Spawning 4 or more UAVs on standard hardware (e.g., consumer laptops) will cause the simulation's Real-Time Factor (RTF) to drop significantly below 1.0. This time-dilation in the physics engine leads to unstable flight dynamics, sensor desynchronization, and erratic autopilot behavior.
+* **Algorithmic Constraints (Lane Assignment):** The dynamic lane assignment in the `mode_UnifiedCombSweep()` algorithm is currently optimized and hardcoded for a 3-lane staggered deployment to guarantee the calculated overlap. Scaling beyond 3 drones requires modifying the `lane_index` assignment logic to support infinite $N$-width expansions without path-planning conflicts.
+* **Formation Geometry Scaling:** The pre-transit `Triangle (V-Shape)` and `Line Abreast` formations are geometrically hardcoded for a 3-agent hierarchy (1 Leader, 2 Wings). Simulating flocking behavior for $N > 3$ requires the future integration of dynamic spatial algorithms (e.g., Boids algorithm).
+
 ## Simulation Demo Video
 
 [![Swarm UAV Simulation Demo](https://img.youtube.com/vi/tb9ah8XswYI/0.jpg)](https://youtu.be/tb9ah8XswYI)
