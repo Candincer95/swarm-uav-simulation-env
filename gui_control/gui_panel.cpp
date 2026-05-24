@@ -16,7 +16,7 @@
 #include <cstring>
 #include <string>
 #include <iostream>
-#include <cmath>     // For maths
+#include <cmath>     // For math
 #include <cstdlib> 
 #include <thread> 
 
@@ -67,13 +67,13 @@ public:
         titleLabel->setStyleSheet("font-size: 16pt; font-weight: bold; margin-bottom: 10px;");
         mainLayout->addWidget(titleLabel);
 
-        // Cyber Attack Section
-        QGroupBox *attackGroup = new QGroupBox("Cyber Attack (GPS)", this);
+        // Sensor Fault Injection
+        QGroupBox *attackGroup = new QGroupBox("Sensor Fault Injection (GPS)", this);
         attackGroup->setStyleSheet("font-weight: bold;");
         QVBoxLayout *attackLayout = new QVBoxLayout(attackGroup);
 
-        QPushButton *btnDeny = new QPushButton("Deny GPS Signal", this);
-        QPushButton *btnSpoof = new QPushButton("Inject GPS Noise (Spoof)", this);
+        QPushButton *btnDeny = new QPushButton("Inject GPS Denial (Block)", this);
+        QPushButton *btnSpoof = new QPushButton("Inject GPS Noise", this);
         QPushButton *btnRecover = new QPushButton("Recover to Normal", this);
 
         btnDeny->setStyleSheet("background-color: #ff4d4d; color: white; padding: 10px; border-radius: 5px;");
@@ -212,8 +212,8 @@ public:
             char buffer[256];
             
             while(true) {
-                int n = recvfrom(listen_fd, (char *)buffer, 256, MSG_WAITALL, NULL, NULL);
-                if (n > 0) {
+                int n = recvfrom(listen_fd, (char *)buffer, sizeof(buffer) -1, MSG_WAITALL, NULL, NULL);
+                if (n >= 0) {
                     buffer[n] = '\0';
                     std::string msg(buffer);
                     
@@ -260,7 +260,7 @@ public:
             statusLabel->setStyleSheet("color: red; font-weight: bold;");
         } else {
             
-            statusLabel->setText(QString("Last Signal Sent: Cyber Command %1").arg(cmdStr.c_str()));
+            statusLabel->setText(QString("Last Signal Sent: Fault Injection Command %1").arg(cmdStr.c_str()));
             statusLabel->setStyleSheet("color: gray; font-style: italic; margin-top: 15px; font-weight: normal;");
         }
     }

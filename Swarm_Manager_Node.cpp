@@ -28,6 +28,12 @@ using std::chrono::seconds;
 using std::chrono::milliseconds;
 using std::this_thread::sleep_for;
 
+// Calculates how many meters 1 degree of longitude in meters based on latitude
+float get_longitude_scale(float lat_deg) {
+    const float earth_radius_m = 6378137.0f;
+    return earth_radius_m * std::cos(lat_deg * M_PI / 180.0f) * (M_PI / 180.0f);
+}
+
 // INDIVIDUAL DRONE CLASS
 class DroneNode {
     public:
@@ -37,6 +43,7 @@ class DroneNode {
         std::unique_ptr<Telemetry> telemetry;
         std::unique_ptr<Offboard> offboard;
         std::unique_ptr<Mission> mission;
+        std::unique_ptr<Param> param;
 
         DroneNode(int drone_id, std::shared_ptr<System> sys) : id(drone_id), system(sys) {
             action = std::make_unique<Action>(system);
@@ -47,8 +54,17 @@ class DroneNode {
 
         void performTakeoff() {
             std::cout << "[Drone " << id << "] takeoff sequence initiated..." << std::endl;
-            action->arm();
-            action->takeoff();
+            
+            mavsdk::Action::Result arm_result = action->arm();
+            if (arm_result != mavsdk::Action::Result::Success) {
+                std::cerr << "[ERROR] Drone " << id << " failed to arm: " << arm_result << std::endl;
+                return;
+            }
+
+            mavsdk::Action::Result takeoff_result = action->takeoff();
+            if (takeoff_result != mavsdk::Action::Result::Success) {
+                std::cerr << "[ERROR] Drone " << id << " failed to takeoff: " << takeoff_result << std::endl;
+            }
         }
 };
 
@@ -57,6 +73,7 @@ class SwarmManager {
     private:
         Mavsdk mavsdk;
         std::vector<std::shared_ptr<DroneNode>> fleet;
+        size_t expected_drones; // For expected number of drones
         
         // THREAD SAFETY: Atomics and Mutex for shared resources
         std::mutex swarm_mutex;
@@ -64,21 +81,22 @@ class SwarmManager {
         std::atomic<bool> fire_alarm_triggered{false};
 
     public:
-        SwarmManager() : mavsdk(Mavsdk::Configuration{ComponentType::GroundStation}) {}
+        // Constructor retrieves the number of drones
+        SwarmManager(size_t drone_count) : mavsdk(Mavsdk::Configuration{ComponentType::GroundStation}), expected_drones(drone_count) {}
 
         void listenForPorts(){
-            std::cout << "[MANAGER] Waiting for drones..." << std::endl;
-            mavsdk.add_any_connection("udpin://0.0.0.0:14541");
-            mavsdk.add_any_connection("udpin://0.0.0.0:14542");
-            mavsdk.add_any_connection("udpin://0.0.0.0:14543");
+            std::cout << "[MANAGER] Waiting for " << expected_drones << " drones..." << std::endl;
+            
+            for (size_t i = 1; i <= expected_drones; ++i) {
+                mavsdk.add_any_connection("udpin://0.0.0.0:" + std::to_string(14540 + i));
+            }
         }
 
         void assembleFleet(){
-            while(mavsdk.systems().size() < 3){
+            while(mavsdk.systems().size() < expected_drones){
                 sleep_for(seconds(1));
             }
 
-            // Lock fleet modification
             std::lock_guard<std::mutex> lock(swarm_mutex);
             int id_counter = 1;
             for (auto sys : mavsdk.systems()){
@@ -98,6 +116,11 @@ class SwarmManager {
 
         // LINE ABREAST FORMATION (TRANSIT)
         void mode_LineAbreastFormation(int duration_seconds){
+            // If there aren't enough drones, skip forming the formation
+            if (fleet.size() < 3) {
+                std::cout << "[MANAGER] Skipping Line Abreast Formation (requires at least 3 drones)." << std::endl;
+                return;
+            }
             std::cout << "[MANAGER] MODE: Line Abreast Formation started. Transiting to target area..." << std::endl;
             is_formation_active = true;
 
@@ -108,10 +131,23 @@ class SwarmManager {
             // Start followers as Threads (Left: -1, Right: +1)
             std::thread left_thread(&SwarmManager::followerOffboardLoop, this, left_wing, leader, -1);
             std::thread right_thread(&SwarmManager::followerOffboardLoop, this, right_wing, leader, 1);
+
+            auto leader_start_pos = leader->telemetry->position_velocity_ned().position;
+
+            Offboard::PositionNedYaw initial_target{};
+            initial_target.north_m = leader_start_pos.north_m;
+            initial_target.east_m = leader_start_pos.east_m;
+            initial_target.down_m = -25.0f;
             
-            // Initiate leader movement
-            leader->offboard->set_position_ned(Offboard::PositionNedYaw{});
-            leader->offboard->start();
+            for (int i = 0; i < 20; ++i) {
+                leader->offboard->set_position_ned(initial_target);
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            }
+            
+            mavsdk::Offboard::Result offboard_result = leader->offboard->start();
+            if (offboard_result != mavsdk::Offboard::Result::Success) {
+                std::cerr << "[ERROR] Leader rejected Offboard mode: " << offboard_result << std::endl;
+            } 
 
             float leader_north_target = 0.0f;
 
@@ -138,19 +174,31 @@ class SwarmManager {
 
         // Inner loop for followers
         void followerOffboardLoop(std::shared_ptr<DroneNode> follower, std::shared_ptr<DroneNode> leader, int direction_multiplier) {
-            follower->offboard->set_position_ned(Offboard::PositionNedYaw{});
+            auto my_start_pos = follower->telemetry->position_velocity_ned().position;
+
+            Offboard::PositionNedYaw initial_target{};
+            initial_target.north_m = my_start_pos.north_m;
+            initial_target.east_m = my_start_pos.east_m;
+            initial_target.down_m = -25.0f;
+
+            for (int i = 0; i < 20; ++i) {
+                follower->offboard->set_position_ned(initial_target);
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            }
+
             follower->offboard->start();
 
             while (is_formation_active) {
                 auto leader_pos = leader->telemetry->position_velocity_ned().position;
+
                 Offboard::PositionNedYaw follower_target{};
                 follower_target.north_m = leader_pos.north_m;
                 follower_target.east_m = leader_pos.east_m + (5.0f * direction_multiplier);
-                follower_target.down_m = leader_pos.down_m;
+                follower_target.down_m = -25.0f;
                 follower_target.yaw_deg = 0.0f;
 
                 follower->offboard->set_position_ned(follower_target);
-                sleep_for(milliseconds(50));
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
             }
             follower->offboard->stop();
         }
@@ -159,21 +207,30 @@ class SwarmManager {
         void mode_UnifiedCombSweep() {
             std::cout << "[MANAGER] MODE: Unified Swarm Sweep (Comb Pattern Lawnmower) started..." << std::endl;
             
+            // Gazebo Standard Origin Point (Zurich/Switzerland)
             const float origin_lat = 47.397742f;
             const float origin_lon = 8.545594;
-            const float altitude = 25.0f; 
-            const float speed = 5.0f; 
+
+            const float altitude = 25.0f; // Scanning altitude
+            const float speed = 5.0f; // Flying speed
+
+            // Forest Borders
             const float x_min = -80.0f;
             const float x_max = 80.0f;
             const float y_min = 10.0f;
             const float y_max = 150.0f;
+            // Distance between drones
             const float strip_spacing = 6.0f;
+
+            float lon_scale = get_longitude_scale(origin_lat); // Dynamic Calculations added
 
             int num_drones = fleet.size();
             if (num_drones == 0) return;
+            
+            // // Total width covered by the swarm in a single pass (3 drones * 6 meters = 18 meters)
             float swarm_step = num_drones * strip_spacing;
 
-            // All drones have been put on standby
+            // Phase 1: Hold
             std::cout << "[MANAGER] Stabilizing swarm before mission upload..." << std::endl;
             for (int i = 0; i < num_drones; ++i) {
                 fleet[i]->action->hold();
@@ -181,16 +238,20 @@ class SwarmManager {
             // PX4 were put on hold for a short time to complete mode switching
             std::this_thread::sleep_for(std::chrono::seconds(2)); 
 
-            // Create and upload missions
+            // Phase 2: Upload
             std::cout << "[MANAGER] Uploading missions to all drones..." << std::endl;
             for (int i = 0; i < num_drones; ++i) {
                 fleet[i]->mission->clear_mission();
                 mavsdk::Mission::MissionPlan mission_plan;
 
                 int lane_index;
-                if (i == 1) lane_index = 0;
-                else if (i == 0) lane_index = 1;
-                else lane_index = 2;
+                if (num_drones == 1) {
+                    lane_index = 0; // If there is only one drone, it scans from the center
+                } else {
+                    if (i == 1) lane_index = 0;
+                    else if (i == 0) lane_index = 1;
+                    else lane_index = 2;
+                }
 
                 float current_swarm_base_x = x_min;
                 bool flying_up = true; 
@@ -201,8 +262,8 @@ class SwarmManager {
                     float current_y_end = flying_up ? y_max : y_min;
 
                     mavsdk::Mission::MissionItem item_start;
-                    item_start.latitude_deg = origin_lat + (current_y_start / 111320.0f);
-                    item_start.longitude_deg = origin_lon + (drone_x / 75440.0f);
+                    item_start.latitude_deg = origin_lat + (current_y_start / 111320.0f); // 1° latitude = 111320 meters
+                    item_start.longitude_deg = origin_lon + (drone_x / lon_scale);
                     item_start.relative_altitude_m = altitude;
                     item_start.speed_m_s = speed;
                     item_start.is_fly_through = true;
@@ -210,12 +271,13 @@ class SwarmManager {
 
                     mavsdk::Mission::MissionItem item_end;
                     item_end.latitude_deg = origin_lat + (current_y_end / 111320.0f);
-                    item_end.longitude_deg = origin_lon + (drone_x / 75440.0f);
+                    item_end.longitude_deg = origin_lon + (drone_x / lon_scale);
                     item_end.relative_altitude_m = altitude;
                     item_end.speed_m_s = speed;
                     item_end.is_fly_through = true;
                     mission_plan.mission_items.push_back(item_end);
 
+                    // Move the swarm 18 meters to the right
                     flying_up = !flying_up;
                     current_swarm_base_x += swarm_step;
                 }
@@ -228,8 +290,8 @@ class SwarmManager {
                 }
             }
 
-            
-            // Start Missions Gradually (STAGGERED ENTRY)
+             
+            // Phase 3: Staggered Entry
             std::cout << "[MANAGER] Executing staggered entry into the forest..." << std::endl;
             for (int i = 0; i < num_drones; ++i) {
                 std::cout << "[MANAGER] Starting mission for Drone " << i << "..." << std::endl;
@@ -246,7 +308,7 @@ class SwarmManager {
 
         // COLLISION AVOIDANCE
         void check_swarm_collision() {
-            const float safety_radius = 3.5f; // 3.5 meters safety border
+            const float safety_radius = 3.5f; // 3.5 meters safe distance
             const float evasion_alt = 35.0f; // A safe upper altitude to escape to in case of collision
             int num_drones = fleet.size();
 
@@ -259,7 +321,8 @@ class SwarmManager {
                     auto pos2 = fleet[j]->telemetry->position();
 
                     // Converting GPS degrees to meters
-                    float dx = (pos2.longitude_deg - pos1.longitude_deg) * 75440.0f;
+                    float lon_scale = get_longitude_scale(pos1.latitude_deg);
+                    float dx = (pos2.longitude_deg - pos1.longitude_deg) * lon_scale;
                     float dy = (pos2.latitude_deg - pos1.latitude_deg) *111320.0f;
                     float dz = pos2.relative_altitude_m - pos1.relative_altitude_m;
 
@@ -298,6 +361,11 @@ class SwarmManager {
 
         // TRIANGLE (V-SHAPE) FORMATION
         void mode_TriangleFormation(int duration_seconds) {
+
+            if (fleet.size() < 3) {
+                std::cout << "[MANAGER] Skipping Triangle Formation (requires at least 3 drones)." << std::endl;
+                return;
+            }
             std::cout << "[MANAGER] MODE: Triangle (V-Shape) Formation initiated..." << std::endl;
             is_formation_active = true;
 
@@ -326,7 +394,7 @@ class SwarmManager {
 
             for (int i = 0; i < 20; ++i) {
                 leader->offboard->set_position_ned(initial_target);
-                std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
             }
 
             mavsdk::Offboard::Result offboard_result = leader->offboard->start();
@@ -345,7 +413,6 @@ class SwarmManager {
             }
 
             is_formation_active = false;
-
             leader->offboard->stop();
 
             left_thread.join();
@@ -385,16 +452,25 @@ class SwarmManager {
         // BACKGROUND UDP LISTENER
         void run_udp_listener() {
             int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+            if (sockfd < 0) {
+                std::cerr << "[ERROR] Sensor Fault UDP Listener socket creation failed!" << std::endl;
+                return;
+            }
+
             struct sockaddr_in servaddr;
             memset(&servaddr, 0, sizeof(servaddr));
             servaddr.sin_family = AF_INET;
             servaddr.sin_addr.s_addr = INADDR_ANY;
             servaddr.sin_port = htons(9090);
             
-            bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr));
+            if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) < 0) {
+                std::cerr << "[ERROR] Sensor Fault UDP Listener bind failed!" << std::endl;
+                close(sockfd);
+                return;
+            }
+
             char buffer[1024];
-            
-            std::cout << "[SYSTEM] External Cyber Attack Listener active on UDP Port 9090" <<std::endl;
+            std::cout << "[SYSTEM] External Sensor Fault Injection Listener active on UDP Port 9090" <<std::endl;
 
             while(true) {
                 // Buffer overflow protection: limiting recvfrom size and checking return value
@@ -404,10 +480,10 @@ class SwarmManager {
                     std::string msg(buffer);
 
                     try{
-                        // "1" -> Deny, "2" -> Spoof, "3" -> Recover
+                        // "1" -> Block, "2" -> Spoof, "3" -> Recover
                         if (msg == "1") {
-                            std::cout << "\n[CYBER THREAT] WARNING: GPS Denial detected across the swarm!" << std::endl;
-                            std::cout << "[DEFENSE] Autonomous Defense Activated: All UAVs climbing to +30m safe altitude..." << std::endl;
+                            std::cout << "\n[SENSOR FAULT] WARNING: GPS Signal Loss (Denial) injected across the swarm!" << std::endl;
+                            std::cout << "[DEFENSE] Autonomous Recovery Activated: All UAVs climbing to +30m safe altitude..." << std::endl;
 
                             std::lock_guard<std::mutex> lock(swarm_mutex);
                             for (auto& drone : fleet) {
@@ -416,15 +492,14 @@ class SwarmManager {
 
                                 // Send the autonomous recovery command
                                 drone->action->goto_location(current_pos.latitude_deg, current_pos.longitude_deg, safe_alt_absolute, 0.0f);
-
                                 // Block the GPS sensor inside PX4
-                                auto param = mavsdk::Param{drone->system};
-                                param.set_param_int("SIM_GPS_BLOCK", 1);
+                                drone->param->set_param_int("SIM_GPS_BLOCK", 1);
+                                
                             }
                         }
                         else if (msg == "2") {
-                            std::cout << "\n[CYBER THREAT] Spoofing attack signal received." << std::endl;
-                            std::cout << "[DEFENSE] Autonomous Defense: Expanding formation to prevent mid-air collision (Dispersion)..." << std::endl;
+                            std::cout << "\n[SENSOR FAULT] GPS Noise (Spoofing) injection received." << std::endl;
+                            std::cout << "[DEFENSE] Autonomous Recovery: Expanding formation to prevent mid-air collision (Dispersion)..." << std::endl;
 
                             std::lock_guard<std::mutex> lock(swarm_mutex);
                             float dispersion_distance = 15.0f;
@@ -438,17 +513,18 @@ class SwarmManager {
                             // Dispersing the other drones to safe distances
                             for (size_t i = 1; i < fleet.size(); ++i) {
                                 auto current_pos = fleet[i]->telemetry->position();
-
+                                
+                                // 1 degree of latitude/longitude is approximately 111320 meters at the Equator
                                 float offset_deg = (i * dispersion_distance) / 111320.0f;
                                 float safe_lat = leader_pos.latitude_deg;
+                                // Expand one drone to the east(even indices), the other to the west(odd indices)
                                 float safe_lon = (i % 2 == 0) ? (leader_pos.longitude_deg + offset_deg) : (leader_pos.longitude_deg - offset_deg);
 
                                 // Fly to the new, expanded safe coordinates
                                 fleet[i]->action->goto_location(safe_lat, safe_lon, current_pos.absolute_altitude_m, 0.0f);
-                                
                                 // Physically injection GPS noise
-                                auto param = mavsdk::Param{fleet[i]->system};
-                                param.set_param_int("SIM_GPS_NOISE", 1);
+                                fleet[i]->param->set_param_int("SIM_GPS_NOISE", 1);
+                                
                             }
                         }
                         else if (msg == "3") {
@@ -460,11 +536,9 @@ class SwarmManager {
                             auto leader_pos = fleet[0]->telemetry->position();
 
                             for (size_t i = 0; i < fleet.size(); ++i) {
-                                auto param = mavsdk::Param{fleet[i]->system};
-
-                                // Restoring GPS sensors to Normal
-                                param.set_param_int("SIM_GPS_BLOCK", 0);
-                                param.set_param_int("SIM_GPS_NOISE", 0);
+                                //Restoring GPS Signals
+                                fleet[i]->param->set_param_int("SIM_GPS_BLOCK", 0);
+                                fleet[i]->param->set_param_int("SIM_GPS_NOISE", 0);
 
                                 float offset_deg = (i * normal_spacing) / 111320.0f;
                                 float target_lat = leader_pos.latitude_deg;
@@ -473,7 +547,7 @@ class SwarmManager {
                                 // Command the UAVs to regroup
                                 fleet[i]->action->goto_location(target_lat, target_lon, leader_pos.absolute_altitude_m, 0.0f);
                             }
-                            std::cout << "[SYSTEM] All sensors online. Swarm reggrouping is in progress..." << std::endl;
+                            std::cout << "[SYSTEM] All sensors online. Swarm regrouping is in progress..." << std::endl;
                         }
                     } catch (...) {
                         std::cout << "[WARNING] Invalid network command received." << std::endl;
@@ -485,23 +559,32 @@ class SwarmManager {
         // TELEMETRY BROADCASTER
         void run_telemetry_broadcaster() {
             int telemetry_fd = socket(AF_INET, SOCK_DGRAM, 0);
+            if (telemetry_fd < 0) {
+                std::cerr << "[ERROR] Telemetry socket creation failed!" << std::endl;
+                return;
+            }
+
             struct sockaddr_in gui_addr;
             memset(&gui_addr, 0, sizeof(gui_addr));
             gui_addr.sin_family = AF_INET;
             gui_addr.sin_port = htons(9091);
             gui_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
             
+            // Dynamic root path
+            const char* root_env = getenv("SWARM_UAV_ROOT");
+            std::string root_dir = root_env ? std::string(root_env) : (std::string(getenv("HOME")) + "/swarm-uav-simulation-env");
+            std::ifstream fire_file(root_dir + "/worlds/fire_ground_truth.txt");
+            
             // Reading the ground truth file
             float target_fire_x = 0.0f;
             float target_fire_y = 0.0f;
-            std::string home_dir = getenv("HOME");
-            std::ifstream fire_file(home_dir + "/swarm-uav-simulation-env/worlds/fire_ground_truth.txt");
+
             if (fire_file.is_open()) {
                 fire_file >> target_fire_x >> target_fire_y;
                 fire_file.close();
                 std::cout << "[SYSTEM] Ground Truth loaded. Hidden fire location confirmed." << std::endl;
             } else {
-                std::cout << "[WARNING] Could not read fire_ground_truth.txt. Check paths." << std::endl;
+                std::cerr << "[WARNING] Could not read fire_ground_truth.txt at " << root_dir << ". Check paths." << std::endl;
             }
 
             while (fleet.empty()) {
@@ -517,6 +600,7 @@ class SwarmManager {
 
             const float origin_lat = 47.397742f;
             const float origin_lon = 8.545594f;
+            float lon_scale = get_longitude_scale(origin_lat); // Origin based dynamic calculation
 
             while (true) {
                 std::lock_guard<std::mutex> lock(swarm_mutex); // Protect fleet iteration
@@ -531,7 +615,7 @@ class SwarmManager {
                     }
 
                     float gazebo_y = (pos.latitude_deg - origin_lat) * 111320.0f; 
-                    float gazebo_x = (pos.longitude_deg - origin_lon) * 75440.0f;
+                    float gazebo_x = (pos.longitude_deg - origin_lon) * lon_scale;
 
                     float fov_radius = pos.relative_altitude_m * 0.15f; 
                     if (fov_radius < 1.0f) fov_radius = 1.0f;
@@ -557,7 +641,6 @@ class SwarmManager {
                                       << gazebo_x << " Y: " << gazebo_y << "!" << std::endl;
                             std::cout << "[SYSTEM] Halting swarm mission to investigate..." << std::endl;
                             
-                            // Hata 1 Çözümü: Yangın tespit edildiğinde tüm dronların görevi durduruluyor
                             for (auto& d : fleet) {
                                 d->mission->pause_mission();
                             }
@@ -565,7 +648,10 @@ class SwarmManager {
                     }
 
                     std::string msg = "T:" + std::to_string(i) + ":" + sx + ":" + sy + ":" + sfov;
-                    sendto(telemetry_fd, msg.c_str(), msg.length(), MSG_CONFIRM, (const struct sockaddr *) &gui_addr, sizeof(gui_addr));
+                    int send_res = sendto(telemetry_fd, msg.c_str(), msg.length(), MSG_CONFIRM, (const struct sockaddr *) &gui_addr, sizeof(gui_addr));
+                    if (send_res < 0) {
+                        std::cerr << "[WARNING] Failed to broadcast telemetry for Drone " << i << std::endl;
+                    }
                 }
                 
                 std::this_thread::sleep_for(std::chrono::milliseconds(200));
@@ -576,7 +662,8 @@ class SwarmManager {
 int main() {
     std::cout << "--- [SYSTEM] SWARM UAV SIMULATION IS STARTING ---" << std::endl;
 
-    SwarmManager manager;
+    size_t TARGET_DRONES = 3;
+    SwarmManager manager(TARGET_DRONES);
 
     // Starting the udp listener
     std::thread udp_thread(&SwarmManager::run_udp_listener, &manager);

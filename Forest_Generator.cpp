@@ -6,9 +6,11 @@
 #include <iomanip>
 
 int main(int argc, char** argv) {
-    // SAVE FILE DIRECTLY TO 'WORLDS' DIRECTORY
-    std::string home_dir = getenv("HOME");
-    std::string output_path = home_dir + "/swarm-uav-simulation-env/worlds/Forest_world.sdf";
+    // SAVE FILE DIRECTLY TO 'WORLDS' DIRECTORY (Dynamic Path)
+    const char* root_env = getenv("SWARM_UAV_ROOT");
+    std::string root_dir = root_env ? std::string(root_env) : (std::string(getenv("HOME")) + "/swarm-uav-simulation-env");
+
+    std::string output_path = root_dir + "/worlds/Forest_world.sdf";
 
     std::ofstream file(output_path);
 
@@ -36,7 +38,7 @@ int main(int argc, char** argv) {
          << "    <plugin name=\"gz::sim::systems::Magnetometer\" filename=\"gz-sim-magnetometer-system\"/>\n"
          << "    <plugin name=\"gz::sim::systems::AirPressure\" filename=\"gz-sim-air-pressure-system\"/>\n"
          << "    <plugin name=\"gz::sim::systems::Contact\" filename=\"gz-sim-contact-system\"/>\n"
-         << "    <plugin name=\"gz::sim::systems::Thermal\" filename=\"gz-sim-thermal-system\"/>\n"
+      // << "    <plugin name=\"gz::sim::systems::Thermal\" filename=\"gz-sim-thermal-system\"/>\n"
 
          // WIND PHYSICS
          << "    <plugin name=\"gz::sim::systems::WindEffects\" filename=\"gz-sim-wind-effects-system\">\n"
@@ -84,26 +86,21 @@ int main(int argc, char** argv) {
          << "      </link>\n"
          << "    </model>\n\n";
 
-    // EMBED DRONES DIRECTLY INTO THE MAP (launch.sh will attach to these models)
-    file << "    \n"
-         << "    <include>\n"
-         << "      <name>x500_001</name>\n"
-         << "      <uri>model://x500_depth</uri>\n"
-         << "      <pose>0 0 0.2 0 0 0</pose>\n"
-         << "    </include>\n\n"
-         << "    \n"
-         << "    <include>\n"
-         << "      <name>x500_002</name>\n"
-         << "      <uri>model://x500_depth</uri>\n"
-         << "      <pose>0 4 0.2 0 0 0</pose>\n"
-         << "    </include>\n\n"
-         << "    \n"
-         << "    <include>\n"
-         << "      <name>x500_003</name>\n"
-         << "      <uri>model://x500_depth</uri>\n"
-         << "      <pose>0 -4 0.2 0 0 0</pose>\n"
-         << "    </include>\n\n";
+    // EMBED DRONES DIRECTLY INTO THE MAP (launch.sh will attach to these models) (Dynamic Spawn)
+    int drone_count = 3; // Change For Tests
 
+    file << "    \n";
+    for (int i = 0; i < drone_count; i++) {
+          // Put 4 meters between the drones on the Y-axis to line them up side by side
+          float spawn_y = (i == 0) ? 0.0f : (i % 2 == 1) ? (i * 4.0f) : (-i * 4.0f + 4.0f);
+
+          file << "    <include>\n"
+             << "      <name>x500_00" << (i + 1) << "</name>\n"
+             << "      <uri>model://x500_depth</uri>\n"
+             << "      <pose>0 " << spawn_y << " 0.2 0 0 0</pose>\n"
+             << "    </include>\n\n";
+    }
+    
     // WINDSOCK FLAG
     file << "    \n"
          << "    <model name=\"windsock_flag\">\n"
@@ -147,16 +144,20 @@ int main(int argc, char** argv) {
     unsigned int seed;
 
     if (argc > 1) {
-     seed = std::stoul(argv[1]);
-     std::cout << "[FOREST GENERATION] Deterministic mode active. Using seed: " << seed << std::endl;
+        try {
+            seed = std::stoul(argv[1]);
+            std::cout << "[FOREST GENERATION] Deterministic mode active. Using seed: " << seed << std::endl;
+        } catch (const std::exception& e) {
+            std::cerr << "[ERROR] Invalid seed format! Please provide a valid positive integer." << std::endl;
+            return 1;
+        }
+    } else {
+        std::random_device rd;
+        seed = rd();
+        std::cout << "[FOREST GENERATOR] Random mode active. Generated seed: " << seed << std::endl;
+        std::cout << "[TIP] Use './Forest_Generator " << seed << "' to reproduce this exact forest!" << std::endl;
     }
-    else {
-     std::random_device rd;
-     seed = rd();
-     std::cout << "[FOREST GENERATOR] Random mode active. Generated seed: " << seed << std::endl;
-     std::cout << "[TIP] Use './Forest_Generator " << seed << "' to reproduce this exact forest!" << std::endl;
-     
-    }
+
     std::mt19937 gen(seed); // MERSENNE TWISTER ALGORITHM BOUND TO THE SEED
     std::uniform_real_distribution<float> dis_x(-80.0f, 80.0f); // Width = 160m
     std::uniform_real_distribution<float> dis_y(10.0f, 150.0f); // Depth = 140m
@@ -222,7 +223,7 @@ int main(int argc, char** argv) {
               << std::fixed << std::setprecision(2) << fire_x << " Y: " << fire_y << std::endl;
 
      // GROUND TRUTH FILE
-     std::string fire_loc_path = home_dir + "/swarm-uav-simulation-env/worlds/fire_ground_truth.txt";
+     std::string fire_loc_path = root_dir + "/worlds/fire_ground_truth.txt";
      std::ofstream fire_file(fire_loc_path);
      if (fire_file.is_open()) {
           fire_file << fire_x << "\n" << fire_y << "\n";
@@ -244,10 +245,11 @@ int main(int argc, char** argv) {
          << "            <emissive>1.0 0.2 0.0 1</emissive>\n"
          << "          </material>\n"
          << "          \n"
-         << "          <plugin filename=\"libgazebo_ros_thermal_sensor.so\" name=\"thermal_sensor_plugin\">\n"
+     /*  << "          <plugin filename=\"libgazebo_ros_thermal_sensor.so\" name=\"thermal_sensor_plugin\">\n"
          << "            <temperature>1200.0</temperature>\n"
          << "            <heat_signature>1200.0</heat_signature>\n"
-         << "          </plugin>\n"
+         << "          </plugin>\n" */ // To do: In future studies, fire detection will be performed using data from drone sensors
+         << "          \n"
          << "        </visual>\n"
          << "        <light name=\"fire_light\" type=\"point\">\n"
          << "          <pose>0 0 6.0 0 0 0</pose>\n"
@@ -266,6 +268,6 @@ int main(int argc, char** argv) {
          << "    </model>\n\n";
     file << "  </world>\n</sdf>\n";
     file.close();
-    std::cout << "[SUCCESS] Forest_world.sdf successfully generated in the 'worlds' directory with " << tree_count << " trees and 3 embedded drones." << std::endl;
+    std::cout << "[SUCCESS] Forest_world.sdf successfully generated in the 'worlds' directory with " << tree_count << " trees and " << drone_count << " embedded drones." << std::endl;
     return 0;
 }
