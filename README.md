@@ -58,17 +58,14 @@ cd build
 
 
 **Step 2: Start the Physical Environment (Gazebo Harmonic & PX4)**
-Open a terminal, navigate to your PX4-Autopilot directory, and spawn the multi-vehicle simulation using our custom environment:
+Open a terminal, navigate to your `PX4-Autopilot` directory, and spawn the multi-vehicle simulation using our custom environment:
 
 ```bash
 export PX4_GZ_WORLD=forest
 Tools/simulation/gz/sitl_multiple_run.sh -n 3
 
 ```
-> **CRITICAL WARNING FOR SCALABILITY TESTS:**
-> The system is fully scalable (from 1 to N drones) for baseline testing. However, the number of spawned vehicles must strictly match across the architecture. If you change the `-n 3` parameter above to `-n 1` (for a single drone test), you **must** also update:
-> 1. `size_t TARGET_DRONES = 1;` in `Swarm_Manager_Node.cpp`
-> 2. `int drone_count = 1;` in `Forest_Generator.cpp` (and regenerate the forest).
+**Note:** The default swarm size is 3. If you wish to scale the system down for single-drone baseline testing, please read Section 9 for the required architectural parameter synchronizations before changing the -n flag.
 
 **Step 3: Execute the Swarm Manager**
 Once the drones are spawned, open a new terminal in this repository's root directory. The script will automatically handle zombie UDP processes (Address already in use errors):
@@ -120,11 +117,21 @@ The swarm will execute a staggered deployment and maintain a locked comb formati
 
 ## 9. System Scalability & Known Limitations
 
-The Swarm Manager architecture (UDP MAVLink routing, telemetry broadcasting, and independent node tracking) is theoretically scalable to $N$ drones. However, for stable reproduction and physical validation, the current optimal baseline is restricted to **1 to 3 UAVs**.
+The Swarm Manager architecture (UDP MAVLink routing, telemetry broadcasting, and independent node tracking) is dynamically scalable. However, for stable reproduction and physical validation on standard hardware, the optimal baseline is restricted to **1 to 3 UAVs**.
 
-* **Hardware Constraints & Physics Dilation (Gazebo RTF):** Running multiple PX4 SITL instances concurrently with Gazebo Harmonic's physics engine is intensely CPU-bound. Spawning 4 or more UAVs on standard hardware (e.g., consumer laptops) will cause the simulation's Real-Time Factor (RTF) to drop significantly below 1.0. This time-dilation in the physics engine leads to unstable flight dynamics, sensor desynchronization, and erratic autopilot behavior.
-* **Algorithmic Constraints (Lane Assignment):** The dynamic lane assignment in the `mode_UnifiedCombSweep()` algorithm is currently optimized and hardcoded for a 3-lane staggered deployment to guarantee the calculated overlap. Scaling beyond 3 drones requires modifying the `lane_index` assignment logic to support infinite $N$-width expansions without path-planning conflicts.
-* **Formation Geometry Scaling:** The pre-transit `Triangle (V-Shape)` and `Line Abreast` formations are geometrically hardcoded for a 3-agent hierarchy (1 Leader, 2 Wings). Simulating flocking behavior for $N > 3$ requires the future integration of dynamic spatial algorithms (e.g., Boids algorithm).
+### Synchronizing Swarm Size (1 to 3 Drones)
+The system is fully scalable down to a single UAV for baseline testing. However, the number of spawned vehicles must strictly match across the entire architecture to prevent system hanging or segmentation faults. If you change the simulation spawn parameter (e.g., to 1 drone), you **must** update all three layers:
+
+1. **Simulation Engine:** `Tools/simulation/gz/sitl_multiple_run.sh -n 1`
+2. **Swarm Manager:** Update `size_t TARGET_DRONES = 1;` in `Swarm_Manager_Node.cpp`.
+3. **Environment Generator:** Update `int drone_count = 1;` in `Forest_Generator.cpp` (and rebuild/regenerate the SDF world).
+
+### Known Limitations (Scaling N > 3)
+Attempting to scale the system to 4 or more drones will introduce the following bottlenecks:
+
+* **Hardware Constraints & Physics Dilation (Gazebo RTF):** Running multiple PX4 SITL instances concurrently with Gazebo Harmonic's physics engine is intensely CPU-bound. Spawning 4 or more UAVs on standard hardware (e.g., consumer laptops) will cause the simulation's Real-Time Factor (RTF) to drop significantly below 1.0. This time-dilation leads to unstable flight dynamics and erratic autopilot behavior.
+* **Algorithmic Constraints (Lane Assignment):** The dynamic lane assignment in the `mode_UnifiedCombSweep()` algorithm is currently optimized and hardcoded for a 3-lane staggered deployment to guarantee the calculated overlap. Scaling beyond 3 drones requires modifying the `lane_index` assignment logic to support infinite $N$-width expansions without path-planning collisions.
+* **Formation Geometry Scaling:** The pre-transit `Triangle (V-Shape)` and `Line Abreast` formations are geometrically hardcoded for a 3-agent hierarchy (1 Leader, 2 Wings). Simulating flocking behavior for $N > 3$ requires the future integration of dynamic spatial algorithms (e.g., Boids algorithm)
 
 ## Simulation Demo Video
 
