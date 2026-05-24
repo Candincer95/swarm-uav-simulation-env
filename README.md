@@ -93,16 +93,19 @@ The simulation features a comprehensive Qt-based GUI that acts as an environment
 
 **Configurable Parameters:**
 
-* **Environment Dynamics (Wind Injection):** Operators can inject physical wind into the Gazebo environment
+* **Environment Dynamics (Wind Injection):**
+  Operators can inject physical wind into the Gazebo environment
+  
 * **Wind Intensity:** Adjustable from 0% to 100% (where 100% equals a physical 10 m/s wind speed).
 * **Wind Direction:** Adjustable from 0° to 360° (where 0° indicates wind blowing exactly from the North). A simulated windsock provides visual ground-truth.
 
 
-* **Sensor Fault Injection (GPS):** Designed to test swarm robustness against sensor failures.
+* **Sensor Fault Injection (GPS):**
+  Designed to test swarm robustness against sensor failures.
+  
 * **Inject GPS Denial (Block):** Injects a strict hardware failure condition blocking satellite connections.
 * **Inject GPS Noise:** Injects artificial error margins into the UAV localization data.
 * **Recover to Normal:** Instantly restores normal sensor function and triggers autonomous swarm regrouping.
-
 
 
 ## 7. Data Formats & Mathematical Modeling
