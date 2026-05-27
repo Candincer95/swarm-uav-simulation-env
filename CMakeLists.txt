@@ -16,7 +16,7 @@ find_package(Threads REQUIRED)
 find_package(gz-transport13 REQUIRED)
 find_package(gz-msgs10 REQUIRED)
 
-add_executable(Swarm_Manager_Node Swarm_Manager_Node.cpp)
+add_executable(Swarm_Manager Swarm_Manager_Node.cpp)
 add_executable(Forest_Generator Forest_Generator.cpp)
 add_executable(gui_panel gui_control/gui_panel.cpp)
 
