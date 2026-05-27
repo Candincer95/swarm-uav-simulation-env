@@ -153,7 +153,7 @@ int main(int argc, char** argv) {
         }
     } else {
         std::random_device rd;
-        seed = rd();
+        seed = 1000 + (rd() % 9000); // 1000 - 9999
         std::cout << "[FOREST GENERATOR] Random mode active. Generated seed: " << seed << std::endl;
         std::cout << "[TIP] Use './Forest_Generator " << seed << "' to reproduce this exact forest!" << std::endl;
     }
